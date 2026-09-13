@@ -217,21 +217,28 @@ img { max-width: 100%; display: block; }
 #servicos .section-head { margin-bottom: 32px; }
 .servicos-list { border-top: 1px solid var(--divider); max-width: 780px; }
 .servico-row { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; padding: 18px 0; border-bottom: 1px solid var(--divider); }
-.servico-name { font-family: var(--font-d); font-size: clamp(1.2rem, 2vw, 1.6rem); font-weight: 400; letter-spacing: 0.01em; color: var(--white); flex-shrink: 0; }
+.servico-head { display: flex; align-items: baseline; gap: 14px; flex-shrink: 0; }
+.servico-name { font-family: var(--font-d); font-size: clamp(1.2rem, 2vw, 1.6rem); font-weight: 400; letter-spacing: 0.01em; color: var(--white); }
 .servico-desc { font-size: 0.8rem; color: var(--muted); text-align: right; max-width: 360px; line-height: 1.55; }
+.servico-price { font-family: var(--font-b); font-size: 0.9rem; font-weight: 600; color: var(--off); }
 .servicos-note { margin-top: 28px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
 .servicos-note p { font-size: 0.78rem; color: var(--muted); }
 
 /* TRABAJOS */
 #trabalhos { background: var(--bg-2); padding: 130px 0; border-top: 1px solid var(--divider); }
-.gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
-.gallery-item { position: relative; aspect-ratio: 4/5; overflow: hidden; background: linear-gradient(155deg, #1b1917 0%, #221f1b 100%); }
-.gallery-item img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s cubic-bezier(0.2,0.7,0.3,1); }
-.gallery-item:hover img { transform: scale(1.07); }
-.gallery-placeholder { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 0.56rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.12); }
-.gallery-item::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 55%); opacity: 0; transition: opacity 0.4s; }
-.gallery-item:hover::after { opacity: 1; }
-.trabalhos-note { margin-top: 40px; display: flex; justify-content: center; }
+.trabalhos-note { margin-top: 32px; display: flex; justify-content: center; }
+
+.stories-widget { position: relative; max-width: 380px; margin: 0 auto; }
+.stories-frame { position: relative; width: 100%; aspect-ratio: 9/16; background: #000; overflow: hidden; border-radius: 6px; }
+.stories-frame img, .stories-frame video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.stories-progress { position: absolute; top: 10px; left: 10px; right: 10px; z-index: 3; display: flex; gap: 4px; }
+.story-seg { flex: 1; height: 2.5px; background: rgba(255,255,255,0.35); border-radius: 2px; overflow: hidden; }
+.story-seg-fill { height: 100%; width: 0%; background: var(--white); }
+.stories-nav-btn { position: absolute; bottom: 14px; z-index: 4; width: 38px; height: 38px; border-radius: 50%; background: rgba(0,0,0,0.45); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; color: var(--white); transition: background 0.2s, transform 0.2s; }
+.stories-nav-btn:hover { background: rgba(0,0,0,0.68); transform: scale(1.06); }
+.stories-nav-btn.prev { left: 14px; }
+.stories-nav-btn.next { right: 14px; }
+.stories-nav-btn svg { width: 16px; height: 16px; }
 
 /* FOOTER */
 footer { background: #08070680; padding: 70px 0 32px; border-top: 1px solid var(--divider); }
@@ -268,7 +275,6 @@ footer { background: #08070680; padding: 70px 0 32px; border-top: 1px solid var(
   #servicos { padding: 60px 0; }
   .servico-row { flex-direction: column; align-items: flex-start; gap: 4px; padding: 15px 0; }
   .servico-desc { text-align: left; max-width: 100%; }
-  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
   .sobre-grid { grid-template-columns: 1fr; gap: 40px; }
   .sobre-photo { max-width: 320px; }
   .footer-top { gap: 32px; }
@@ -277,7 +283,6 @@ footer { background: #08070680; padding: 70px 0 32px; border-top: 1px solid var(
   #navbar { padding: 18px 20px; }
   #navbar.shrunk { padding: 14px 20px; }
   .section-inner { padding: 0 20px; }
-  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
   .hero-actions { flex-direction: column; width: 100%; }
   .hero-actions .btn { width: 100%; }
 }
@@ -422,23 +427,37 @@ footer { background: #08070680; padding: 70px 0 32px; border-top: 1px solid var(
 
     <div class="servicos-list reveal">
       <div class="servico-row">
-        <span class="servico-name"><span data-pt="Corte de cabelo" data-en="Haircut" data-es="Corte de pelo">Corte de pelo</span></span>
+        <span class="servico-head">
+          <span class="servico-name"><span data-pt="Corte de cabelo" data-en="Haircut" data-es="Corte de pelo">Corte de pelo</span></span>
+          <span class="servico-price">15€</span>
+        </span>
         <span class="servico-desc"><span data-pt="Precisão no risco, acabamento que dura." data-en="Precise line work, a finish that lasts." data-es="Precisión en la línea, un acabado que dura.">Precisión en la línea, un acabado que dura.</span></span>
       </div>
       <div class="servico-row">
-        <span class="servico-name"><span data-pt="Barba" data-en="Beard" data-es="Barba">Barba</span></span>
+        <span class="servico-head">
+          <span class="servico-name"><span data-pt="Barba" data-en="Beard" data-es="Barba">Barba</span></span>
+          <span class="servico-price">12€</span>
+        </span>
         <span class="servico-desc"><span data-pt="Contorno definido, na medida do seu rosto." data-en="A defined outline, shaped to your face." data-es="Contorno definido, a la medida de tu rostro.">Contorno definido, a la medida de tu rostro.</span></span>
       </div>
       <div class="servico-row">
-        <span class="servico-name"><span data-pt="Corte + Barba" data-en="Haircut + Beard" data-es="Corte + Barba">Corte + Barba</span></span>
+        <span class="servico-head">
+          <span class="servico-name"><span data-pt="Corte + Barba" data-en="Haircut + Beard" data-es="Corte + Barba">Corte + Barba</span></span>
+          <span class="servico-price">23€</span>
+        </span>
         <span class="servico-desc"><span data-pt="O conjunto completo, em uma única sessão." data-en="The complete package, in one session." data-es="El conjunto completo, en una sola sesión.">El conjunto completo, en una sola sesión.</span></span>
       </div>
       <div class="servico-row">
-        <span class="servico-name"><span data-pt="Sobrancelha" data-en="Eyebrows" data-es="Cejas">Cejas</span></span>
+        <span class="servico-head">
+          <span class="servico-name"><span data-pt="Sobrancelha" data-en="Eyebrows" data-es="Cejas">Cejas</span></span>
+          <span class="servico-price">2€</span>
+        </span>
         <span class="servico-desc"><span data-pt="Detalhe que muda a expressão do rosto." data-en="A detail that changes your whole expression." data-es="Un detalle que cambia la expresión del rostro.">Un detalle que cambia la expresión del rostro.</span></span>
       </div>
       <div class="servico-row">
-        <span class="servico-name"><span data-pt="Selagem" data-en="Keratin smoothing" data-es="Alisado">Alisado</span></span>
+        <span class="servico-head">
+          <span class="servico-name"><span data-pt="Selagem" data-en="Keratin smoothing" data-es="Alisado">Alisado</span></span>
+        </span>
         <span class="servico-desc"><span data-pt="Alinhamento e brilho, sem perder o volume natural." data-en="Alignment and shine, without losing natural volume." data-es="Alineación y brillo, sin perder el volumen natural.">Alineación y brillo, sin perder el volumen natural.</span></span>
       </div>
     </div>
@@ -465,23 +484,23 @@ footer { background: #08070680; padding: 70px 0 32px; border-top: 1px solid var(
     </div>
   </div>
 
-  <div class="gallery-grid">
-    <div class="gallery-item reveal reveal-d1"><div class="gallery-placeholder">01</div><img src="images/trabalho-01.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-    <div class="gallery-item reveal reveal-d2"><div class="gallery-placeholder">02</div><img src="images/trabalho-02.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-    <div class="gallery-item reveal reveal-d3"><div class="gallery-placeholder">03</div><img src="images/trabalho-03.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-    <div class="gallery-item reveal reveal-d1"><div class="gallery-placeholder">04</div><img src="images/trabalho-04.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-    <div class="gallery-item reveal reveal-d2"><div class="gallery-placeholder">05</div><img src="images/trabalho-05.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-    <div class="gallery-item reveal reveal-d3"><div class="gallery-placeholder">06</div><img src="images/trabalho-06.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-    <div class="gallery-item reveal reveal-d1"><div class="gallery-placeholder">07</div><img src="images/trabalho-07.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-    <div class="gallery-item reveal reveal-d2"><div class="gallery-placeholder">08</div><img src="images/trabalho-08.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-    <div class="gallery-item reveal reveal-d3"><div class="gallery-placeholder">09</div><img src="images/trabalho-09.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-  </div>
-
   <div class="section-inner">
+    <div class="stories-widget reveal">
+      <div class="stories-frame" id="stories-frame">
+        <div class="stories-progress" id="stories-progress"></div>
+      </div>
+      <button class="stories-nav-btn prev" id="stories-prev" aria-label="Anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="stories-nav-btn next" id="stories-next" aria-label="Siguiente">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+
     <div class="trabalhos-note reveal">
-      <a class="btn btn-outline" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDczMDI0MTEyMTA3NDY0?story_media_id=3652599448414556374&stkn=cmVtOW1nMGZmaDd4" target="_blank" rel="noopener">
+      <a class="btn btn-outline" href="https://www.instagram.com/_caiodornelas/" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
-        <span data-pt="Ver mais no Instagram" data-en="See more on Instagram" data-es="Ver más en Instagram">Ver más en Instagram</span>
+        <span data-pt="Ver mais resultados" data-en="See more results" data-es="Ver más resultados">Ver más resultados</span>
       </a>
     </div>
   </div>
@@ -505,8 +524,8 @@ footer { background: #08070680; padding: 70px 0 32px; border-top: 1px solid var(
 
     <div class="footer-mid">
       <div class="social-row">
-        <!-- TODO: Caio — substituir os href="#" pelos links reais do Instagram e TikTok -->
-        <a href="#" target="_blank" rel="noopener" class="social-link">
+        <!-- TODO: Caio — substituir o href="#" do TikTok pelo link real -->
+        <a href="https://www.instagram.com/_caiodornelas/" target="_blank" rel="noopener" class="social-link">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
           Instagram
         </a>
@@ -563,6 +582,118 @@ footer { background: #08070680; padding: 70px 0 32px; border-top: 1px solid var(
     burger.setAttribute('aria-expanded', String(isOpen));
   });
   mobileMenu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeMenu); });
+
+  (function () {
+    const frame = document.getElementById('stories-frame');
+    if (!frame) return;
+
+    const stories = [
+      { type: 'image', src: 'trabalhos/story-01.jpg' },
+      { type: 'image', src: 'trabalhos/story-02.jpg' },
+      { type: 'image', src: 'trabalhos/story-03.jpg' },
+      { type: 'image', src: 'trabalhos/story-04.jpg' },
+      { type: 'image', src: 'trabalhos/story-05.jpg' },
+      { type: 'video', src: 'trabalhos/story-06.mp4' },
+      { type: 'video', src: 'trabalhos/story-07.mp4' },
+      { type: 'video', src: 'trabalhos/story-08.mp4' },
+      { type: 'video', src: 'trabalhos/story-09.mp4' },
+      { type: 'video', src: 'trabalhos/story-10.mp4' },
+      { type: 'video', src: 'trabalhos/story-11.mp4' },
+      { type: 'video', src: 'trabalhos/story-12.mp4' },
+      { type: 'video', src: 'trabalhos/story-13.mp4' },
+      { type: 'video', src: 'trabalhos/story-14.mp4' }
+    ];
+    const IMAGE_DURATION = 4500;
+
+    const progressWrap = document.getElementById('stories-progress');
+    stories.forEach(function () {
+      const seg = document.createElement('div');
+      seg.className = 'story-seg';
+      const fill = document.createElement('div');
+      fill.className = 'story-seg-fill';
+      seg.appendChild(fill);
+      progressWrap.appendChild(seg);
+    });
+    const segFills = progressWrap.querySelectorAll('.story-seg-fill');
+
+    let idx = 0;
+    let currentEl = null;
+    let startTime = 0;
+    let paused = false;
+
+    function setSegState(i) {
+      segFills.forEach(function (f, j) { f.style.width = j < i ? '100%' : '0%'; });
+    }
+
+    function tick() {
+      requestAnimationFrame(tick);
+      if (paused || !currentEl) return;
+      let elapsed;
+      if (currentEl.tagName === 'VIDEO') {
+        if (!currentEl.duration || isNaN(currentEl.duration)) return;
+        elapsed = currentEl.currentTime / currentEl.duration;
+      } else {
+        elapsed = (performance.now() - startTime) / IMAGE_DURATION;
+      }
+      segFills[idx].style.width = Math.min(1, elapsed) * 100 + '%';
+      if (elapsed >= 1) next();
+    }
+
+    function clearMedia() {
+      if (currentEl) {
+        if (currentEl.tagName === 'VIDEO') currentEl.pause();
+        currentEl.remove();
+        currentEl = null;
+      }
+    }
+
+    function show(i) {
+      idx = ((i % stories.length) + stories.length) % stories.length;
+      clearMedia();
+      setSegState(idx);
+      const item = stories[idx];
+      let el;
+      if (item.type === 'video') {
+        el = document.createElement('video');
+        el.src = item.src;
+        el.muted = true;
+        el.setAttribute('muted', '');
+        el.setAttribute('playsinline', '');
+        el.setAttribute('webkit-playsinline', '');
+        el.autoplay = true;
+        el.preload = 'auto';
+        el.addEventListener('ended', next);
+      } else {
+        el = document.createElement('img');
+        el.src = item.src;
+        el.alt = '';
+        startTime = performance.now();
+      }
+      frame.appendChild(el);
+      currentEl = el;
+      if (item.type === 'video') el.play().catch(function () {});
+    }
+
+    function next() { show(idx + 1); }
+    function prev() { show(idx - 1); }
+
+    document.getElementById('stories-prev').addEventListener('click', prev);
+    document.getElementById('stories-next').addEventListener('click', next);
+
+    const widget = document.querySelector('.stories-widget');
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        paused = !e.isIntersecting;
+        if (currentEl && currentEl.tagName === 'VIDEO') {
+          if (paused) currentEl.pause();
+          else currentEl.play().catch(function () {});
+        }
+      });
+    }, { threshold: 0.4 }).observe(widget);
+
+    show(0);
+    requestAnimationFrame(tick);
+  })();
 
   const revealEls = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver(function (entries) {
