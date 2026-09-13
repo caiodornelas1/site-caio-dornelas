@@ -215,13 +215,13 @@ img { max-width: 100%; display: block; }
 /* SERVICIOS */
 #servicos { background: var(--bg); padding: 90px 0; border-top: 1px solid var(--divider); }
 #servicos .section-head { margin-bottom: 32px; }
-.servicos-list { border-top: 1px solid var(--divider); max-width: 780px; }
-.servico-row { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; padding: 18px 0; border-bottom: 1px solid var(--divider); }
-.servico-head { display: flex; align-items: baseline; gap: 14px; flex-shrink: 0; }
-.servico-name { font-family: var(--font-d); font-size: clamp(1.2rem, 2vw, 1.6rem); font-weight: 400; letter-spacing: 0.01em; color: var(--white); }
-.servico-desc { font-size: 0.8rem; color: var(--muted); text-align: right; max-width: 360px; line-height: 1.55; }
-.servico-price { font-family: var(--font-b); font-size: 0.9rem; font-weight: 600; color: var(--off); }
-.servicos-note { margin-top: 28px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+.servicos-list { border-top: 1px solid var(--divider); max-width: 620px; margin: 0 auto; }
+.servico-row { display: flex; align-items: baseline; gap: 14px; padding: 20px 0; border-bottom: 1px solid var(--divider); }
+.servico-name { font-family: var(--font-d); font-size: clamp(1.2rem, 2vw, 1.6rem); font-weight: 400; letter-spacing: 0.01em; color: var(--white); flex-shrink: 0; }
+.servico-dots { flex: 1; border-bottom: 1px dotted var(--faint); margin-bottom: 7px; }
+.servico-price { font-family: var(--font-b); font-size: 1.15rem; font-weight: 600; color: var(--white); flex-shrink: 0; }
+.servico-price-consult { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.servicos-note { margin-top: 28px; display: flex; align-items: center; justify-content: center; gap: 24px; flex-wrap: wrap; text-align: center; }
 .servicos-note p { font-size: 0.78rem; color: var(--muted); }
 
 /* TRABAJOS */
@@ -239,6 +239,10 @@ img { max-width: 100%; display: block; }
 .stories-nav-btn.prev { left: 14px; }
 .stories-nav-btn.next { right: 14px; }
 .stories-nav-btn svg { width: 16px; height: 16px; }
+
+/* CTA FINAL */
+#cta-final { background: var(--bg-3); padding: 80px 0; border-top: 1px solid var(--divider); text-align: center; }
+.cta-final-text { font-family: var(--font-d); font-weight: 400; letter-spacing: 0.01em; font-size: clamp(1.6rem, 3.2vw, 2.4rem); color: var(--white); margin-bottom: 32px; }
 
 /* FOOTER */
 footer { background: #08070680; padding: 70px 0 32px; border-top: 1px solid var(--divider); }
@@ -273,8 +277,7 @@ footer { background: #08070680; padding: 70px 0 32px; border-top: 1px solid var(
   .burger { display: block; }
   #sobre, #trabalhos { padding: 90px 0; }
   #servicos { padding: 60px 0; }
-  .servico-row { flex-direction: column; align-items: flex-start; gap: 4px; padding: 15px 0; }
-  .servico-desc { text-align: left; max-width: 100%; }
+  .servico-row { padding: 15px 0; gap: 10px; }
   .sobre-grid { grid-template-columns: 1fr; gap: 40px; }
   .sobre-photo { max-width: 320px; }
   .footer-top { gap: 32px; }
@@ -306,8 +309,8 @@ footer { background: #08070680; padding: 70px 0 32px; border-top: 1px solid var(
   <a href="#hero" class="nav-logo">Caio Dornelas</a>
   <div class="nav-links">
     <a href="#sobre" data-pt="Sobre" data-en="About" data-es="Sobre mí">Sobre mí</a>
-    <a href="#servicos" data-pt="Serviços" data-en="Services" data-es="Servicios">Servicios</a>
     <a href="#trabalhos" data-pt="Trabalhos" data-en="Work" data-es="Trabajos">Trabajos</a>
+    <a href="#servicos" data-pt="Serviços" data-en="Services" data-es="Servicios">Servicios</a>
   </div>
   <div class="nav-right">
     <div class="lang-toggle">
@@ -331,8 +334,8 @@ footer { background: #08070680; padding: 70px 0 32px; border-top: 1px solid var(
 
 <div id="mobile-menu">
   <a class="mm-link" href="#sobre" data-pt="Sobre" data-en="About" data-es="Sobre mí">Sobre mí</a>
-  <a class="mm-link" href="#servicos" data-pt="Serviços" data-en="Services" data-es="Servicios">Servicios</a>
   <a class="mm-link" href="#trabalhos" data-pt="Trabalhos" data-en="Work" data-es="Trabajos">Trabajos</a>
+  <a class="mm-link" href="#servicos" data-pt="Serviços" data-en="Services" data-es="Servicios">Servicios</a>
   <a class="btn btn-primary"
      href="https://wa.me/33626467133?text=Hola+Caio%2C+vi+tu+web."
      target="_blank" rel="noopener"
@@ -418,64 +421,6 @@ footer { background: #08070680; padding: 70px 0 32px; border-top: 1px solid var(
   </div>
 </section>
 
-<section id="servicos">
-  <div class="section-inner">
-    <div class="section-head reveal">
-      <p class="section-eyebrow"><span data-pt="O que eu faço" data-en="What I do" data-es="Lo que hago">Lo que hago</span></p>
-      <h2 class="section-title"><span data-pt="Serviços" data-en="Services" data-es="Servicios">Servicios</span></h2>
-    </div>
-
-    <div class="servicos-list reveal">
-      <div class="servico-row">
-        <span class="servico-head">
-          <span class="servico-name"><span data-pt="Corte de cabelo" data-en="Haircut" data-es="Corte de pelo">Corte de pelo</span></span>
-          <span class="servico-price">15€</span>
-        </span>
-        <span class="servico-desc"><span data-pt="Precisão no risco, acabamento que dura." data-en="Precise line work, a finish that lasts." data-es="Precisión en la línea, un acabado que dura.">Precisión en la línea, un acabado que dura.</span></span>
-      </div>
-      <div class="servico-row">
-        <span class="servico-head">
-          <span class="servico-name"><span data-pt="Barba" data-en="Beard" data-es="Barba">Barba</span></span>
-          <span class="servico-price">12€</span>
-        </span>
-        <span class="servico-desc"><span data-pt="Contorno definido, na medida do seu rosto." data-en="A defined outline, shaped to your face." data-es="Contorno definido, a la medida de tu rostro.">Contorno definido, a la medida de tu rostro.</span></span>
-      </div>
-      <div class="servico-row">
-        <span class="servico-head">
-          <span class="servico-name"><span data-pt="Corte + Barba" data-en="Haircut + Beard" data-es="Corte + Barba">Corte + Barba</span></span>
-          <span class="servico-price">23€</span>
-        </span>
-        <span class="servico-desc"><span data-pt="O conjunto completo, em uma única sessão." data-en="The complete package, in one session." data-es="El conjunto completo, en una sola sesión.">El conjunto completo, en una sola sesión.</span></span>
-      </div>
-      <div class="servico-row">
-        <span class="servico-head">
-          <span class="servico-name"><span data-pt="Sobrancelha" data-en="Eyebrows" data-es="Cejas">Cejas</span></span>
-          <span class="servico-price">2€</span>
-        </span>
-        <span class="servico-desc"><span data-pt="Detalhe que muda a expressão do rosto." data-en="A detail that changes your whole expression." data-es="Un detalle que cambia la expresión del rostro.">Un detalle que cambia la expresión del rostro.</span></span>
-      </div>
-      <div class="servico-row">
-        <span class="servico-head">
-          <span class="servico-name"><span data-pt="Selagem" data-en="Keratin smoothing" data-es="Alisado">Alisado</span></span>
-        </span>
-        <span class="servico-desc"><span data-pt="Alinhamento e brilho, sem perder o volume natural." data-en="Alignment and shine, without losing natural volume." data-es="Alineación y brillo, sin perder el volumen natural.">Alineación y brillo, sin perder el volumen natural.</span></span>
-      </div>
-    </div>
-
-    <div class="servicos-note reveal">
-      <p><span data-pt="Para valores e disponibilidade, fale comigo no WhatsApp." data-en="For prices and availability, message me on WhatsApp." data-es="Para precios y disponibilidad, escríbeme por WhatsApp.">Para precios y disponibilidad, escríbeme por WhatsApp.</span></p>
-      <a class="btn btn-outline"
-         href="https://wa.me/33626467133?text=Hola+Caio%2C+vi+tu+web+y+me+gustar%C3%ADa+m%C3%A1s+informaci%C3%B3n."
-         target="_blank" rel="noopener"
-         data-pt-href="https://wa.me/33626467133?text=Ol%C3%A1+Caio%2C+vi+seu+site+e+gostaria+de+mais+informa%C3%A7%C3%B5es."
-         data-en-href="https://wa.me/33626467133?text=Hi+Caio%2C+I+saw+your+website+and+I+would+like+more+information."
-         data-es-href="https://wa.me/33626467133?text=Hola+Caio%2C+vi+tu+web+y+me+gustar%C3%ADa+m%C3%A1s+informaci%C3%B3n.">
-        <span data-pt="Falar no WhatsApp" data-en="Message on WhatsApp" data-es="Escríbeme por WhatsApp">Escríbeme por WhatsApp</span>
-      </a>
-    </div>
-  </div>
-</section>
-
 <section id="trabalhos">
   <div class="section-inner">
     <div class="section-head reveal">
@@ -506,6 +451,71 @@ footer { background: #08070680; padding: 70px 0 32px; border-top: 1px solid var(
   </div>
 </section>
 
+<section id="servicos">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <p class="section-eyebrow"><span data-pt="O que eu faço" data-en="What I do" data-es="Lo que hago">Lo que hago</span></p>
+      <h2 class="section-title"><span data-pt="Serviços" data-en="Services" data-es="Servicios">Servicios</span></h2>
+    </div>
+
+    <div class="servicos-list reveal">
+      <div class="servico-row">
+        <span class="servico-name"><span data-pt="Corte de cabelo" data-en="Haircut" data-es="Corte de pelo">Corte de pelo</span></span>
+        <span class="servico-dots"></span>
+        <span class="servico-price">15€</span>
+      </div>
+      <div class="servico-row">
+        <span class="servico-name"><span data-pt="Barba" data-en="Beard" data-es="Barba">Barba</span></span>
+        <span class="servico-dots"></span>
+        <span class="servico-price">12€</span>
+      </div>
+      <div class="servico-row">
+        <span class="servico-name"><span data-pt="Corte + Barba" data-en="Haircut + Beard" data-es="Corte + Barba">Corte + Barba</span></span>
+        <span class="servico-dots"></span>
+        <span class="servico-price">23€</span>
+      </div>
+      <div class="servico-row">
+        <span class="servico-name"><span data-pt="Sobrancelha" data-en="Eyebrows" data-es="Cejas">Cejas</span></span>
+        <span class="servico-dots"></span>
+        <span class="servico-price">2€</span>
+      </div>
+      <div class="servico-row">
+        <span class="servico-name"><span data-pt="Selagem" data-en="Keratin smoothing" data-es="Alisado">Alisado</span></span>
+        <span class="servico-dots"></span>
+        <span class="servico-price servico-price-consult"><span data-pt="Sob consulta" data-en="On request" data-es="A consultar">A consultar</span></span>
+      </div>
+    </div>
+
+    <div class="servicos-note reveal">
+      <p><span data-pt="Para valores e disponibilidade, fale comigo no WhatsApp." data-en="For prices and availability, message me on WhatsApp." data-es="Para precios y disponibilidad, escríbeme por WhatsApp.">Para precios y disponibilidad, escríbeme por WhatsApp.</span></p>
+      <a class="btn btn-outline"
+         href="https://wa.me/33626467133?text=Hola+Caio%2C+vi+tu+web+y+me+gustar%C3%ADa+m%C3%A1s+informaci%C3%B3n."
+         target="_blank" rel="noopener"
+         data-pt-href="https://wa.me/33626467133?text=Ol%C3%A1+Caio%2C+vi+seu+site+e+gostaria+de+mais+informa%C3%A7%C3%B5es."
+         data-en-href="https://wa.me/33626467133?text=Hi+Caio%2C+I+saw+your+website+and+I+would+like+more+information."
+         data-es-href="https://wa.me/33626467133?text=Hola+Caio%2C+vi+tu+web+y+me+gustar%C3%ADa+m%C3%A1s+informaci%C3%B3n.">
+        <span data-pt="Falar no WhatsApp" data-en="Message on WhatsApp" data-es="Escríbeme por WhatsApp">Escríbeme por WhatsApp</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="cta-final">
+  <div class="section-inner">
+    <p class="cta-final-text">
+      <span data-pt="Venha viver esta experiência." data-en="Come live this experience." data-es="Ven a vivir esta experiencia.">Ven a vivir esta experiencia.</span>
+    </p>
+    <a class="btn btn-outline"
+       href="https://wa.me/33626467133?text=Hola+Caio%2C+vi+tu+web."
+       target="_blank" rel="noopener"
+       data-pt-href="https://wa.me/33626467133?text=Ol%C3%A1+Caio%2C+vi+seu+site."
+       data-en-href="https://wa.me/33626467133?text=Hi+Caio%2C+I+saw+your+website."
+       data-es-href="https://wa.me/33626467133?text=Hola+Caio%2C+vi+tu+web.">
+      <span data-pt="Falar comigo" data-en="Message me" data-es="Escríbeme">Escríbeme</span>
+    </a>
+  </div>
+</section>
+
 </main>
 
 <footer>
@@ -517,8 +527,8 @@ footer { background: #08070680; padding: 70px 0 32px; border-top: 1px solid var(
       </div>
       <nav class="footer-nav">
         <a href="#sobre" data-pt="Sobre" data-en="About" data-es="Sobre mí">Sobre mí</a>
-        <a href="#servicos" data-pt="Serviços" data-en="Services" data-es="Servicios">Servicios</a>
         <a href="#trabalhos" data-pt="Trabalhos" data-en="Work" data-es="Trabajos">Trabajos</a>
+        <a href="#servicos" data-pt="Serviços" data-en="Services" data-es="Servicios">Servicios</a>
       </nav>
     </div>
 

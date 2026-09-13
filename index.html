@@ -389,12 +389,12 @@ a.local-address:hover { color: var(--off); border-bottom-color: var(--faint); }
 #servicos { background: var(--bg); padding: 90px 0; border-top: 1px solid var(--divider); }
 #servicos .section-head { margin-bottom: 32px; }
 
-.servicos-list { border-top: 1px solid var(--divider); max-width: 780px; }
+.servicos-list { border-top: 1px solid var(--divider); max-width: 780px; margin: 0 auto; }
 
 .servico-row {
   display: flex;
   align-items: baseline;
-  justify-content: space-between;
+  justify-content: center;
   gap: 24px;
   padding: 18px 0;
   border-bottom: 1px solid var(--divider);
@@ -407,14 +407,6 @@ a.local-address:hover { color: var(--off); border-bottom-color: var(--faint); }
   color: var(--white);
   flex-shrink: 0;
 }
-.servico-desc {
-  font-size: 0.8rem;
-  color: var(--muted);
-  text-align: right;
-  max-width: 360px;
-  line-height: 1.55;
-}
-
 .servicos-note {
   margin-top: 28px;
   display: flex;
@@ -556,6 +548,19 @@ a.local-address:hover { color: var(--off); border-bottom-color: var(--faint); }
 .faq-body { font-size: 0.82rem; color: var(--muted); line-height: 1.85; padding: 0 0 26px; max-width: 620px; }
 
 /* ═══════════════════════════
+   CTA FINAL
+═══════════════════════════ */
+#cta-final { background: var(--bg-3); padding: 80px 0; border-top: 1px solid var(--divider); text-align: center; }
+.cta-final-text {
+  font-family: var(--font-d);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+  color: var(--white);
+  margin-bottom: 32px;
+}
+
+/* ═══════════════════════════
    FOOTER
 ═══════════════════════════ */
 footer { background: #08070680; padding: 70px 0 32px; border-top: 1px solid var(--divider); }
@@ -656,9 +661,6 @@ footer { background: #08070680; padding: 70px 0 32px; border-top: 1px solid var(
   .locais-grid { grid-template-columns: 1fr; }
   .local-card { padding: 40px 28px; }
 
-  .servico-row { flex-direction: column; align-items: flex-start; gap: 4px; padding: 15px 0; }
-  .servico-desc { text-align: left; max-width: 100%; }
-
   .sobre-grid { grid-template-columns: 1fr; gap: 40px; }
   .sobre-photo { max-width: 320px; }
 
@@ -700,8 +702,8 @@ footer { background: #08070680; padding: 70px 0 32px; border-top: 1px solid var(
 
   <div class="nav-links">
     <a href="#onde-atendo" data-pt="Onde atendo" data-fr="Où je travaille">Onde atendo</a>
-    <a href="#servicos" data-pt="Serviços" data-fr="Prestations">Serviços</a>
     <a href="#trabalhos" data-pt="Trabalhos" data-fr="Réalisations">Trabalhos</a>
+    <a href="#servicos" data-pt="Serviços" data-fr="Prestations">Serviços</a>
     <a href="#sobre" data-pt="Sobre" data-fr="À propos">Sobre</a>
     <a href="#faq" data-pt="FAQ" data-fr="FAQ">FAQ</a>
   </div>
@@ -729,8 +731,8 @@ footer { background: #08070680; padding: 70px 0 32px; border-top: 1px solid var(
 <!-- ═══ MOBILE MENU ═══ -->
 <div id="mobile-menu">
   <a class="mm-link" href="#onde-atendo" data-pt="Onde atendo" data-fr="Où je travaille">Onde atendo</a>
-  <a class="mm-link" href="#servicos" data-pt="Serviços" data-fr="Prestations">Serviços</a>
   <a class="mm-link" href="#trabalhos" data-pt="Trabalhos" data-fr="Réalisations">Trabalhos</a>
+  <a class="mm-link" href="#servicos" data-pt="Serviços" data-fr="Prestations">Serviços</a>
   <a class="mm-link" href="#sobre" data-pt="Sobre" data-fr="À propos">Sobre</a>
   <a class="mm-link" href="#faq" data-pt="FAQ" data-fr="FAQ">FAQ</a>
   <a class="btn btn-primary"
@@ -864,51 +866,7 @@ footer { background: #08070680; padding: 70px 0 32px; border-top: 1px solid var(
   </div>
 </section>
 
-<!-- ═══ SECTION 3: SERVIÇOS ═══ -->
-<section id="servicos">
-  <div class="section-inner">
-    <div class="section-head reveal">
-      <p class="section-eyebrow"><span data-pt="O que eu faço" data-fr="Ce que je fais">O que eu faço</span></p>
-      <h2 class="section-title"><span data-pt="Serviços" data-fr="Prestations">Serviços</span></h2>
-    </div>
-
-    <div class="servicos-list reveal">
-      <div class="servico-row">
-        <span class="servico-name"><span data-pt="Corte de cabelo" data-fr="Coupe de cheveux">Corte de cabelo</span></span>
-        <span class="servico-desc"><span data-pt="Precisão no risco, acabamento que dura." data-fr="Précision de la coupe, une finition qui dure.">Precisão no risco, acabamento que dura.</span></span>
-      </div>
-      <div class="servico-row">
-        <span class="servico-name"><span data-pt="Barba" data-fr="Barbe">Barba</span></span>
-        <span class="servico-desc"><span data-pt="Contorno definido, na medida do seu rosto." data-fr="Contour défini, à la mesure de votre visage.">Contorno definido, na medida do seu rosto.</span></span>
-      </div>
-      <div class="servico-row">
-        <span class="servico-name"><span data-pt="Corte + Barba" data-fr="Coupe + Barbe">Corte + Barba</span></span>
-        <span class="servico-desc"><span data-pt="O conjunto completo, em uma única sessão." data-fr="L'ensemble complet, en une seule séance.">O conjunto completo, em uma única sessão.</span></span>
-      </div>
-      <div class="servico-row">
-        <span class="servico-name"><span data-pt="Sobrancelha" data-fr="Sourcils">Sobrancelha</span></span>
-        <span class="servico-desc"><span data-pt="Detalhe que muda a expressão do rosto." data-fr="Un détail qui change l'expression du visage.">Detalhe que muda a expressão do rosto.</span></span>
-      </div>
-      <div class="servico-row">
-        <span class="servico-name"><span data-pt="Selagem" data-fr="Lissage">Selagem</span></span>
-        <span class="servico-desc"><span data-pt="Alinhamento e brilho, sem perder o volume natural." data-fr="Alignement et brillance, sans perdre le volume naturel.">Alinhamento e brilho, sem perder o volume natural.</span></span>
-      </div>
-    </div>
-
-    <div class="servicos-note reveal">
-      <p><span data-pt="Para valores e disponibilidade, fale comigo no WhatsApp." data-fr="Pour les tarifs et les disponibilités, contactez-moi sur WhatsApp.">Para valores e disponibilidade, fale comigo no WhatsApp.</span></p>
-      <a class="btn btn-outline"
-         href="https://wa.me/33626467133?text=Ol%C3%A1+Caio%2C+vi+seu+site+e+gostaria+de+mais+informa%C3%A7%C3%B5es."
-         target="_blank" rel="noopener"
-         data-pt-href="https://wa.me/33626467133?text=Ol%C3%A1+Caio%2C+vi+seu+site+e+gostaria+de+mais+informa%C3%A7%C3%B5es."
-         data-fr-href="https://wa.me/33626467133?text=Bonjour+Caio%2C+j%27ai+vu+votre+site+et+j%27aimerais+plus+d%27informations.">
-        <span data-pt="Falar no WhatsApp" data-fr="Contacter sur WhatsApp">Falar no WhatsApp</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ SECTION 4: TRABALHOS ═══ -->
+<!-- ═══ SECTION 3: TRABALHOS ═══ -->
 <section id="trabalhos">
   <div class="section-inner">
     <div class="section-head reveal">
@@ -934,6 +892,45 @@ footer { background: #08070680; padding: 70px 0 32px; border-top: 1px solid var(
       <a class="btn btn-outline" href="https://www.instagram.com/_caiodornelas/" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
         <span data-pt="Ver mais resultados" data-fr="Voir plus de résultats">Ver mais resultados</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 4: SERVIÇOS ═══ -->
+<section id="servicos">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <p class="section-eyebrow"><span data-pt="O que eu faço" data-fr="Ce que je fais">O que eu faço</span></p>
+      <h2 class="section-title"><span data-pt="Serviços" data-fr="Prestations">Serviços</span></h2>
+    </div>
+
+    <div class="servicos-list reveal">
+      <div class="servico-row">
+        <span class="servico-name"><span data-pt="Corte de cabelo" data-fr="Coupe de cheveux">Corte de cabelo</span></span>
+      </div>
+      <div class="servico-row">
+        <span class="servico-name"><span data-pt="Barba" data-fr="Barbe">Barba</span></span>
+      </div>
+      <div class="servico-row">
+        <span class="servico-name"><span data-pt="Corte + Barba" data-fr="Coupe + Barbe">Corte + Barba</span></span>
+      </div>
+      <div class="servico-row">
+        <span class="servico-name"><span data-pt="Sobrancelha" data-fr="Sourcils">Sobrancelha</span></span>
+      </div>
+      <div class="servico-row">
+        <span class="servico-name"><span data-pt="Selagem" data-fr="Lissage">Selagem</span></span>
+      </div>
+    </div>
+
+    <div class="servicos-note reveal">
+      <p><span data-pt="Para valores e disponibilidade, fale comigo no WhatsApp." data-fr="Pour les tarifs et les disponibilités, contactez-moi sur WhatsApp.">Para valores e disponibilidade, fale comigo no WhatsApp.</span></p>
+      <a class="btn btn-outline"
+         href="https://wa.me/33626467133?text=Ol%C3%A1+Caio%2C+vi+seu+site+e+gostaria+de+mais+informa%C3%A7%C3%B5es."
+         target="_blank" rel="noopener"
+         data-pt-href="https://wa.me/33626467133?text=Ol%C3%A1+Caio%2C+vi+seu+site+e+gostaria+de+mais+informa%C3%A7%C3%B5es."
+         data-fr-href="https://wa.me/33626467133?text=Bonjour+Caio%2C+j%27ai+vu+votre+site+et+j%27aimerais+plus+d%27informations.">
+        <span data-pt="Falar no WhatsApp" data-fr="Contacter sur WhatsApp">Falar no WhatsApp</span>
       </a>
     </div>
   </div>
@@ -1037,6 +1034,22 @@ footer { background: #08070680; padding: 70px 0 32px; border-top: 1px solid var(
   </div>
 </section>
 
+<!-- ═══ SECTION 7: CTA FINAL ═══ -->
+<section id="cta-final">
+  <div class="section-inner">
+    <p class="cta-final-text">
+      <span data-pt="Venha viver esta experiência." data-fr="Venez vivre cette expérience.">Venha viver esta experiência.</span>
+    </p>
+    <a class="btn btn-outline"
+       href="https://wa.me/33626467133?text=Ol%C3%A1+Caio%2C+vi+seu+site+e+gostaria+de+mais+informa%C3%A7%C3%B5es."
+       target="_blank" rel="noopener"
+       data-pt-href="https://wa.me/33626467133?text=Ol%C3%A1+Caio%2C+vi+seu+site+e+gostaria+de+mais+informa%C3%A7%C3%B5es."
+       data-fr-href="https://wa.me/33626467133?text=Bonjour+Caio%2C+j%27ai+vu+votre+site+et+j%27aimerais+plus+d%27informations.">
+      <span data-pt="Falar comigo" data-fr="Me contacter">Falar comigo</span>
+    </a>
+  </div>
+</section>
+
 </main>
 
 <!-- ═══ FOOTER ═══ -->
@@ -1049,8 +1062,8 @@ footer { background: #08070680; padding: 70px 0 32px; border-top: 1px solid var(
       </div>
       <nav class="footer-nav">
         <a href="#onde-atendo" data-pt="Onde atendo" data-fr="Où je travaille">Onde atendo</a>
-        <a href="#servicos" data-pt="Serviços" data-fr="Prestations">Serviços</a>
         <a href="#trabalhos" data-pt="Trabalhos" data-fr="Réalisations">Trabalhos</a>
+        <a href="#servicos" data-pt="Serviços" data-fr="Prestations">Serviços</a>
         <a href="#sobre" data-pt="Sobre" data-fr="À propos">Sobre</a>
         <a href="#faq" data-pt="FAQ" data-fr="FAQ">FAQ</a>
       </nav>
