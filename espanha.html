@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caio Dornelas — Barbero en Ourense</title>
+<meta name="description" content="Caio Dornelas, barbero brasileño. Atención en O Carballiño, Ourense. Escúchame antes de cortar.">
+<meta property="og:title" content="Caio Dornelas — Barbero en Ourense">
+<meta property="og:description" content="Barbero brasileño. Escucho antes de cortar.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:       #0D0C0A;
+  --bg-2:     #121110;
+  --bg-3:     #171514;
+  --white:    #FFFFFF;
+  --off:      rgba(255,255,255,0.72);
+  --muted:    rgba(255,255,255,0.42);
+  --faint:    rgba(255,255,255,0.18);
+  --divider:  rgba(255,255,255,0.09);
+  --navy:     #1B2A4A;
+  --navy-2:   #26396A;
+  --font-d:   'Bebas Neue', 'Arial Narrow', sans-serif;
+  --font-b:   'Manrope', system-ui, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-b);
+  font-weight: 300;
+  background: var(--bg);
+  color: var(--white);
+  overflow-x: hidden;
+  line-height: 1.5;
+}
+
+a { text-decoration: none; color: inherit; }
+button { border: none; background: none; font-family: var(--font-b); cursor: pointer; }
+img { max-width: 100%; display: block; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+.section-inner { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+.section-head { margin-bottom: 56px; }
+.section-eyebrow {
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--navy-2);
+  font-weight: 500;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.section-eyebrow::after { content: ''; flex: 0 0 40px; height: 1px; background: var(--divider); }
+.section-title {
+  font-family: var(--font-d);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  font-size: clamp(2.2rem, 4.4vw, 3.6rem);
+  line-height: 1.05;
+  color: var(--white);
+}
+
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-d1 { transition-delay: 0.08s; }
+.reveal-d2 { transition-delay: 0.16s; }
+.reveal-d3 { transition-delay: 0.24s; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 34px;
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: background 0.3s, border-color 0.3s, transform 0.2s, color 0.3s;
+  white-space: nowrap;
+}
+.btn svg { width: 15px; height: 15px; flex-shrink: 0; }
+.btn-primary { background: var(--navy); color: var(--white); }
+.btn-primary:hover { background: var(--navy-2); transform: translateY(-2px); }
+.btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.28); }
+.btn-outline:hover { border-color: var(--white); transform: translateY(-2px); }
+
+/* NAVBAR */
+#navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 40px;
+  transition: background 0.4s, padding 0.3s, border-color 0.4s;
+  border-bottom: 1px solid transparent;
+}
+#navbar.shrunk {
+  background: rgba(13,12,10,0.86);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 16px 40px;
+  border-bottom-color: var(--divider);
+}
+.nav-logo { font-family: var(--font-d); font-size: 1.15rem; letter-spacing: 0.08em; color: var(--white); flex-shrink: 0; }
+.nav-links { display: flex; align-items: center; gap: 34px; }
+.nav-links a { font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--off); transition: color 0.2s; }
+.nav-links a:hover { color: var(--white); }
+.nav-right { display: flex; align-items: center; gap: 26px; }
+.lang-toggle { display: flex; align-items: center; gap: 8px; }
+.lang-btn { font-size: 0.64rem; letter-spacing: 0.16em; color: var(--muted); padding: 2px 0; transition: color 0.2s; }
+.lang-btn.active { color: var(--white); }
+.lang-sep { color: var(--faint); font-size: 0.66rem; }
+.nav-cta { display: inline-flex; }
+
+.burger { display: none; width: 26px; height: 18px; position: relative; flex-shrink: 0; }
+.burger span { position: absolute; left: 0; right: 0; height: 1px; background: var(--white); transition: transform 0.3s, opacity 0.3s, top 0.3s; }
+.burger span:nth-child(1) { top: 0; }
+.burger span:nth-child(2) { top: 8px; }
+.burger span:nth-child(3) { top: 16px; }
+.burger.open span:nth-child(1) { top: 8px; transform: rotate(45deg); }
+.burger.open span:nth-child(2) { opacity: 0; }
+.burger.open span:nth-child(3) { top: 8px; transform: rotate(-45deg); }
+
+#mobile-menu {
+  position: fixed; inset: 0; z-index: 999;
+  background: var(--bg);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 34px;
+  opacity: 0; pointer-events: none; transform: translateY(-12px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+#mobile-menu.open { opacity: 1; pointer-events: auto; transform: none; }
+#mobile-menu a.mm-link { font-family: var(--font-d); font-size: 1.8rem; font-weight: 400; color: var(--white); }
+#mobile-menu .lang-toggle { margin-top: 8px; }
+
+/* HERO */
+#hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  background: var(--bg);
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(27,42,74,0.35) 0%, transparent 55%),
+    linear-gradient(155deg, #171511 0%, #0c0b09 55%, #080706 100%);
+}
+.hero-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  background-size: 220px;
+  opacity: 0.5;
+}
+.hero-bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(8,7,6,0.35) 0%, rgba(8,7,6,0.55) 55%, rgba(8,7,6,0.88) 100%); }
+.hero-content { position: relative; z-index: 2; max-width: 720px; padding: 0 28px; }
+.hero-name {
+  font-family: var(--font-d);
+  font-weight: 400;
+  font-size: clamp(3.4rem, 9vw, 6.6rem);
+  line-height: 0.96;
+  letter-spacing: 0.01em;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+.hero-subtitle { font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--off); font-weight: 500; margin-bottom: 26px; }
+.hero-tagline {
+  font-family: var(--font-b);
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  font-weight: 300;
+  color: rgba(255,255,255,0.82);
+  max-width: 440px;
+  margin: 0 auto 44px;
+  line-height: 1.6;
+}
+.hero-actions { display: flex; align-items: center; justify-content: center; gap: 18px; flex-wrap: wrap; }
+.hero-scroll { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.hero-scroll-text { font-size: 0.56rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--muted); }
+.hero-scroll-arrow { width: 15px; height: 15px; border-right: 1px solid var(--muted); border-bottom: 1px solid var(--muted); transform: rotate(45deg); animation: bounceDown 2.2s ease-in-out infinite; }
+@keyframes bounceDown { 0%, 100% { transform: rotate(45deg) translate(0,0); } 50% { transform: rotate(45deg) translate(4px,4px); } }
+
+/* SOBRE */
+#sobre { background: var(--bg-2); padding: 130px 0; border-top: 1px solid var(--divider); }
+.sobre-grid { display: grid; grid-template-columns: 5fr 6fr; gap: 80px; align-items: center; }
+.sobre-photo { position: relative; aspect-ratio: 3/4; overflow: hidden; background: linear-gradient(155deg, #171512 0%, #1f1c18 100%); }
+.sobre-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05); }
+.sobre-photo-placeholder { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 0.56rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.14); }
+.sobre-bio { font-size: 0.9rem; line-height: 2; color: rgba(255,255,255,0.55); font-weight: 300; margin-bottom: 40px; max-width: 480px; }
+.sobre-bio strong { color: rgba(255,255,255,0.88); font-weight: 500; }
+
+/* SERVICIOS */
+#servicos { background: var(--bg); padding: 90px 0; border-top: 1px solid var(--divider); }
+#servicos .section-head { margin-bottom: 32px; }
+.servicos-list { border-top: 1px solid var(--divider); max-width: 780px; }
+.servico-row { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; padding: 18px 0; border-bottom: 1px solid var(--divider); }
+.servico-name { font-family: var(--font-d); font-size: clamp(1.2rem, 2vw, 1.6rem); font-weight: 400; letter-spacing: 0.01em; color: var(--white); flex-shrink: 0; }
+.servico-desc { font-size: 0.8rem; color: var(--muted); text-align: right; max-width: 360px; line-height: 1.55; }
+.servicos-note { margin-top: 28px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+.servicos-note p { font-size: 0.78rem; color: var(--muted); }
+
+/* TRABAJOS */
+#trabalhos { background: var(--bg-2); padding: 130px 0; border-top: 1px solid var(--divider); }
+.gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
+.gallery-item { position: relative; aspect-ratio: 4/5; overflow: hidden; background: linear-gradient(155deg, #1b1917 0%, #221f1b 100%); }
+.gallery-item img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s cubic-bezier(0.2,0.7,0.3,1); }
+.gallery-item:hover img { transform: scale(1.07); }
+.gallery-placeholder { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 0.56rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.12); }
+.gallery-item::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 55%); opacity: 0; transition: opacity 0.4s; }
+.gallery-item:hover::after { opacity: 1; }
+.trabalhos-note { margin-top: 40px; display: flex; justify-content: center; }
+
+/* FOOTER */
+footer { background: #08070680; padding: 70px 0 32px; border-top: 1px solid var(--divider); }
+.footer-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 48px; margin-bottom: 56px; }
+.f-brand-name { font-family: var(--font-d); font-size: 1.7rem; letter-spacing: 0.01em; color: var(--white); margin-bottom: 8px; }
+.f-brand-sub { font-size: 0.66rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+.footer-nav { display: flex; flex-wrap: wrap; gap: 28px; }
+.footer-nav a { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--off); transition: color 0.2s; }
+.footer-nav a:hover { color: var(--white); }
+.footer-mid { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px; padding-top: 40px; border-top: 1px solid var(--divider); margin-bottom: 32px; }
+.social-row { display: flex; gap: 22px; }
+.social-link { display: flex; align-items: center; gap: 8px; font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); transition: color 0.2s; }
+.social-link:hover { color: var(--white); }
+.social-link svg { width: 14px; height: 14px; }
+.footer-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 0.6rem; letter-spacing: 0.08em; color: var(--faint); }
+
+/* WHATSAPP FLOAT */
+#wa-float {
+  position: fixed; bottom: 28px; right: 28px; z-index: 900;
+  width: 52px; height: 52px; border-radius: 4px;
+  background: var(--navy);
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.3s, transform 0.25s;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+}
+#wa-float:hover { background: var(--navy-2); transform: translateY(-3px) scale(1.05); }
+#wa-float svg { width: 22px; height: 22px; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .nav-links, .nav-right .nav-cta, .nav-right .lang-toggle { display: none; }
+  .burger { display: block; }
+  #sobre, #trabalhos { padding: 90px 0; }
+  #servicos { padding: 60px 0; }
+  .servico-row { flex-direction: column; align-items: flex-start; gap: 4px; padding: 15px 0; }
+  .servico-desc { text-align: left; max-width: 100%; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .sobre-grid { grid-template-columns: 1fr; gap: 40px; }
+  .sobre-photo { max-width: 320px; }
+  .footer-top { gap: 32px; }
+}
+@media (max-width: 480px) {
+  #navbar { padding: 18px 20px; }
+  #navbar.shrunk { padding: 14px 20px; }
+  .section-inner { padding: 0 20px; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero-actions { flex-direction: column; width: 100%; }
+  .hero-actions .btn { width: 100%; }
+}
+@media (min-width: 1440px) {
+  #navbar { padding: 30px 64px; }
+  #navbar.shrunk { padding: 18px 64px; }
+}
+</style>
+</head>
+<body>
+
+<!--
+  ═══════════════════════════════════════════════════════════
+  Página institucional para o público de O Carballiño / Ourense.
+  Reaproveita as mesmas imagens do site principal:
+  images/sobre.jpg, images/trabalho-01.jpg … trabalho-09.jpg
+  ═══════════════════════════════════════════════════════════
+-->
+
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">Caio Dornelas</a>
+  <div class="nav-links">
+    <a href="#sobre" data-pt="Sobre" data-en="About" data-es="Sobre mí">Sobre mí</a>
+    <a href="#servicos" data-pt="Serviços" data-en="Services" data-es="Servicios">Servicios</a>
+    <a href="#trabalhos" data-pt="Trabalhos" data-en="Work" data-es="Trabajos">Trabajos</a>
+  </div>
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn" id="btn-pt" onclick="setLang('pt')">PT</button>
+      <span class="lang-sep">|</span>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+      <span class="lang-sep">|</span>
+      <button class="lang-btn active" id="btn-es" onclick="setLang('es')">ES</button>
+    </div>
+    <a class="btn btn-primary nav-cta"
+       href="https://wa.me/33626467133?text=Hola+Caio%2C+vi+tu+web."
+       target="_blank" rel="noopener"
+       data-pt-href="https://wa.me/33626467133?text=Ol%C3%A1+Caio%2C+vi+seu+site."
+       data-en-href="https://wa.me/33626467133?text=Hi+Caio%2C+I+saw+your+website."
+       data-es-href="https://wa.me/33626467133?text=Hola+Caio%2C+vi+tu+web.">
+      <span data-pt="Falar comigo" data-en="Message me" data-es="Escríbeme">Escríbeme</span>
+    </a>
+  </div>
+  <button class="burger" id="burger-btn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+</nav>
+
+<div id="mobile-menu">
+  <a class="mm-link" href="#sobre" data-pt="Sobre" data-en="About" data-es="Sobre mí">Sobre mí</a>
+  <a class="mm-link" href="#servicos" data-pt="Serviços" data-en="Services" data-es="Servicios">Servicios</a>
+  <a class="mm-link" href="#trabalhos" data-pt="Trabalhos" data-en="Work" data-es="Trabajos">Trabajos</a>
+  <a class="btn btn-primary"
+     href="https://wa.me/33626467133?text=Hola+Caio%2C+vi+tu+web."
+     target="_blank" rel="noopener"
+     data-pt-href="https://wa.me/33626467133?text=Ol%C3%A1+Caio%2C+vi+seu+site."
+     data-en-href="https://wa.me/33626467133?text=Hi+Caio%2C+I+saw+your+website."
+     data-es-href="https://wa.me/33626467133?text=Hola+Caio%2C+vi+tu+web.">
+    <span data-pt="Falar comigo" data-en="Message me" data-es="Escríbeme">Escríbeme</span>
+  </a>
+  <div class="lang-toggle">
+    <button class="lang-btn" id="btn-pt-m" onclick="setLang('pt')">PT</button>
+    <span class="lang-sep">|</span>
+    <button class="lang-btn" id="btn-en-m" onclick="setLang('en')">EN</button>
+    <span class="lang-sep">|</span>
+    <button class="lang-btn active" id="btn-es-m" onclick="setLang('es')">ES</button>
+  </div>
+</div>
+
+<header id="hero">
+  <div class="hero-bg">
+    <img src="images/hero-espanha.jpg" alt="Caio Dornelas" loading="eager" onerror="this.style.display='none'">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1 class="hero-name">Caio Dornelas</h1>
+    <p class="hero-subtitle">
+      <span data-pt="Barbeiro · O Carballiño, Ourense" data-en="Barber · O Carballiño, Ourense" data-es="Barbero · O Carballiño, Ourense">Barbero · O Carballiño, Ourense</span>
+    </p>
+    <p class="hero-tagline">
+      <span data-pt="Cada corte começa com uma conversa." data-en="Every cut starts with a conversation." data-es="Cada corte empieza con una conversación.">Cada corte empieza con una conversación.</span>
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary"
+         href="https://wa.me/33626467133?text=Hola+Caio%2C+vi+tu+web."
+         target="_blank" rel="noopener"
+         data-pt-href="https://wa.me/33626467133?text=Ol%C3%A1+Caio%2C+vi+seu+site."
+         data-en-href="https://wa.me/33626467133?text=Hi+Caio%2C+I+saw+your+website."
+         data-es-href="https://wa.me/33626467133?text=Hola+Caio%2C+vi+tu+web.">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+        <span data-pt="Falar comigo" data-en="Message me" data-es="Escríbeme">Escríbeme</span>
+      </a>
+      <a class="btn btn-outline" href="#trabalhos">
+        <span data-pt="Ver trabalhos" data-en="See my work" data-es="Ver trabajos">Ver trabajos</span>
+      </a>
+    </div>
+  </div>
+  <a class="hero-scroll" href="#sobre" aria-label="Descubrir">
+    <span class="hero-scroll-text" data-pt="Descobrir" data-en="Discover" data-es="Descubrir">Descubrir</span>
+    <span class="hero-scroll-arrow"></span>
+  </a>
+</header>
+
+<main>
+
+<section id="sobre">
+  <div class="section-inner">
+    <div class="sobre-grid">
+      <div class="sobre-photo reveal">
+        <div class="sobre-photo-placeholder"><span data-pt="Foto — Caio Dornelas" data-en="Photo — Caio Dornelas" data-es="Foto — Caio Dornelas">Foto — Caio Dornelas</span></div>
+        <img src="images/sobre.jpg" alt="Caio Dornelas" loading="lazy" onerror="this.style.display='none'">
+      </div>
+      <div class="sobre-content reveal reveal-d1">
+        <p class="section-eyebrow" style="margin-bottom:16px"><span data-pt="Sobre" data-en="About" data-es="Sobre mí">Sobre mí</span></p>
+        <h2 class="section-title" style="margin-bottom:30px">Caio Dornelas</h2>
+        <p class="sobre-bio">
+          <span
+            data-pt="<strong>8 anos de experiência.</strong> Nasci no Brasil e construí minha carreira em Paris — hoje também atendo na região de Ourense. Antes de cortar, eu escuto: sua rotina, seu jeito, o que funciona pra você no dia a dia. Não é sobre repetir uma referência de Instagram. É sobre um corte que é seu, que você reconhece no espelho toda manhã."
+            data-en="<strong>8 years of experience.</strong> Born in Brazil, I built my career in Paris — and I'm now also working in the Ourense region. Before I cut, I listen: your routine, your style, what actually works for you day to day. It's not about copying an Instagram reference. It's about a cut that's yours — one you recognize in the mirror every morning."
+            data-es="<strong>8 años de experiencia.</strong> Nací en Brasil y construí mi carrera en París — y ahora también atiendo en la zona de Ourense. Antes de cortar, escucho: tu rutina, tu estilo, lo que realmente te funciona en el día a día. No se trata de copiar una referencia de Instagram. Se trata de un corte que es tuyo, que reconoces en el espejo cada mañana.">
+            <strong>8 años de experiencia.</strong> Nací en Brasil y construí mi carrera en París — y ahora también atiendo en la zona de Ourense. Antes de cortar, escucho: tu rutina, tu estilo, lo que realmente te funciona en el día a día. No se trata de copiar una referencia de Instagram. Se trata de un corte que es tuyo, que reconoces en el espejo cada mañana.
+          </span>
+        </p>
+        <a class="btn btn-primary"
+           href="https://wa.me/33626467133?text=Hola+Caio%2C+vi+tu+web+y+me+gustar%C3%ADa+m%C3%A1s+informaci%C3%B3n."
+           target="_blank" rel="noopener"
+           data-pt-href="https://wa.me/33626467133?text=Ol%C3%A1+Caio%2C+vi+seu+site+e+gostaria+de+mais+informa%C3%A7%C3%B5es."
+           data-en-href="https://wa.me/33626467133?text=Hi+Caio%2C+I+saw+your+website+and+I+would+like+more+information."
+           data-es-href="https://wa.me/33626467133?text=Hola+Caio%2C+vi+tu+web+y+me+gustar%C3%ADa+m%C3%A1s+informaci%C3%B3n.">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+          <span data-pt="Falar comigo no WhatsApp" data-en="Message me on WhatsApp" data-es="Escríbeme por WhatsApp">Escríbeme por WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="servicos">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <p class="section-eyebrow"><span data-pt="O que eu faço" data-en="What I do" data-es="Lo que hago">Lo que hago</span></p>
+      <h2 class="section-title"><span data-pt="Serviços" data-en="Services" data-es="Servicios">Servicios</span></h2>
+    </div>
+
+    <div class="servicos-list reveal">
+      <div class="servico-row">
+        <span class="servico-name"><span data-pt="Corte de cabelo" data-en="Haircut" data-es="Corte de pelo">Corte de pelo</span></span>
+        <span class="servico-desc"><span data-pt="Precisão no risco, acabamento que dura." data-en="Precise line work, a finish that lasts." data-es="Precisión en la línea, un acabado que dura.">Precisión en la línea, un acabado que dura.</span></span>
+      </div>
+      <div class="servico-row">
+        <span class="servico-name"><span data-pt="Barba" data-en="Beard" data-es="Barba">Barba</span></span>
+        <span class="servico-desc"><span data-pt="Contorno definido, na medida do seu rosto." data-en="A defined outline, shaped to your face." data-es="Contorno definido, a la medida de tu rostro.">Contorno definido, a la medida de tu rostro.</span></span>
+      </div>
+      <div class="servico-row">
+        <span class="servico-name"><span data-pt="Corte + Barba" data-en="Haircut + Beard" data-es="Corte + Barba">Corte + Barba</span></span>
+        <span class="servico-desc"><span data-pt="O conjunto completo, em uma única sessão." data-en="The complete package, in one session." data-es="El conjunto completo, en una sola sesión.">El conjunto completo, en una sola sesión.</span></span>
+      </div>
+      <div class="servico-row">
+        <span class="servico-name"><span data-pt="Sobrancelha" data-en="Eyebrows" data-es="Cejas">Cejas</span></span>
+        <span class="servico-desc"><span data-pt="Detalhe que muda a expressão do rosto." data-en="A detail that changes your whole expression." data-es="Un detalle que cambia la expresión del rostro.">Un detalle que cambia la expresión del rostro.</span></span>
+      </div>
+      <div class="servico-row">
+        <span class="servico-name"><span data-pt="Selagem" data-en="Keratin smoothing" data-es="Alisado">Alisado</span></span>
+        <span class="servico-desc"><span data-pt="Alinhamento e brilho, sem perder o volume natural." data-en="Alignment and shine, without losing natural volume." data-es="Alineación y brillo, sin perder el volumen natural.">Alineación y brillo, sin perder el volumen natural.</span></span>
+      </div>
+    </div>
+
+    <div class="servicos-note reveal">
+      <p><span data-pt="Para valores e disponibilidade, fale comigo no WhatsApp." data-en="For prices and availability, message me on WhatsApp." data-es="Para precios y disponibilidad, escríbeme por WhatsApp.">Para precios y disponibilidad, escríbeme por WhatsApp.</span></p>
+      <a class="btn btn-outline"
+         href="https://wa.me/33626467133?text=Hola+Caio%2C+vi+tu+web+y+me+gustar%C3%ADa+m%C3%A1s+informaci%C3%B3n."
+         target="_blank" rel="noopener"
+         data-pt-href="https://wa.me/33626467133?text=Ol%C3%A1+Caio%2C+vi+seu+site+e+gostaria+de+mais+informa%C3%A7%C3%B5es."
+         data-en-href="https://wa.me/33626467133?text=Hi+Caio%2C+I+saw+your+website+and+I+would+like+more+information."
+         data-es-href="https://wa.me/33626467133?text=Hola+Caio%2C+vi+tu+web+y+me+gustar%C3%ADa+m%C3%A1s+informaci%C3%B3n.">
+        <span data-pt="Falar no WhatsApp" data-en="Message on WhatsApp" data-es="Escríbeme por WhatsApp">Escríbeme por WhatsApp</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="trabalhos">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <p class="section-eyebrow"><span data-pt="Portfólio" data-en="Portfolio" data-es="Portafolio">Portafolio</span></p>
+      <h2 class="section-title"><span data-pt="Trabalhos" data-en="Work" data-es="Trabajos">Trabajos</span></h2>
+    </div>
+  </div>
+
+  <div class="gallery-grid">
+    <div class="gallery-item reveal reveal-d1"><div class="gallery-placeholder">01</div><img src="images/trabalho-01.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+    <div class="gallery-item reveal reveal-d2"><div class="gallery-placeholder">02</div><img src="images/trabalho-02.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+    <div class="gallery-item reveal reveal-d3"><div class="gallery-placeholder">03</div><img src="images/trabalho-03.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+    <div class="gallery-item reveal reveal-d1"><div class="gallery-placeholder">04</div><img src="images/trabalho-04.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+    <div class="gallery-item reveal reveal-d2"><div class="gallery-placeholder">05</div><img src="images/trabalho-05.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+    <div class="gallery-item reveal reveal-d3"><div class="gallery-placeholder">06</div><img src="images/trabalho-06.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+    <div class="gallery-item reveal reveal-d1"><div class="gallery-placeholder">07</div><img src="images/trabalho-07.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+    <div class="gallery-item reveal reveal-d2"><div class="gallery-placeholder">08</div><img src="images/trabalho-08.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+    <div class="gallery-item reveal reveal-d3"><div class="gallery-placeholder">09</div><img src="images/trabalho-09.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+  </div>
+
+  <div class="section-inner">
+    <div class="trabalhos-note reveal">
+      <a class="btn btn-outline" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDczMDI0MTEyMTA3NDY0?story_media_id=3652599448414556374&stkn=cmVtOW1nMGZmaDd4" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+        <span data-pt="Ver mais no Instagram" data-en="See more on Instagram" data-es="Ver más en Instagram">Ver más en Instagram</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="section-inner">
+    <div class="footer-top">
+      <div>
+        <p class="f-brand-name">Caio Dornelas</p>
+        <p class="f-brand-sub"><span data-pt="Barbeiro · O Carballiño, Ourense" data-en="Barber · O Carballiño, Ourense" data-es="Barbero · O Carballiño, Ourense">Barbero · O Carballiño, Ourense</span></p>
+      </div>
+      <nav class="footer-nav">
+        <a href="#sobre" data-pt="Sobre" data-en="About" data-es="Sobre mí">Sobre mí</a>
+        <a href="#servicos" data-pt="Serviços" data-en="Services" data-es="Servicios">Servicios</a>
+        <a href="#trabalhos" data-pt="Trabalhos" data-en="Work" data-es="Trabajos">Trabajos</a>
+      </nav>
+    </div>
+
+    <div class="footer-mid">
+      <div class="social-row">
+        <!-- TODO: Caio — substituir os href="#" pelos links reais do Instagram e TikTok -->
+        <a href="#" target="_blank" rel="noopener" class="social-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+          Instagram
+        </a>
+        <a href="#" target="_blank" rel="noopener" class="social-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+          TikTok
+        </a>
+      </div>
+      <a class="btn btn-outline"
+         href="https://wa.me/33626467133?text=Hola+Caio%2C+vi+tu+web+y+me+gustar%C3%ADa+m%C3%A1s+informaci%C3%B3n."
+         target="_blank" rel="noopener"
+         data-pt-href="https://wa.me/33626467133?text=Ol%C3%A1+Caio%2C+vi+seu+site+e+gostaria+de+mais+informa%C3%A7%C3%B5es."
+         data-en-href="https://wa.me/33626467133?text=Hi+Caio%2C+I+saw+your+website+and+I+would+like+more+information."
+         data-es-href="https://wa.me/33626467133?text=Hola+Caio%2C+vi+tu+web+y+me+gustar%C3%ADa+m%C3%A1s+informaci%C3%B3n.">
+        <span data-pt="Falar comigo no WhatsApp" data-en="Message me on WhatsApp" data-es="Escríbeme por WhatsApp">Escríbeme por WhatsApp</span>
+      </a>
+    </div>
+
+    <div class="footer-bottom">
+      <span id="f-copy">© 2026 Caio Dornelas. Tous droits réservés.</span>
+    </div>
+  </div>
+</footer>
+
+<a id="wa-float"
+   href="https://wa.me/33626467133?text=Hola+Caio%2C+vi+tu+web+y+me+gustar%C3%ADa+m%C3%A1s+informaci%C3%B3n."
+   target="_blank" rel="noopener"
+   aria-label="WhatsApp"
+   data-pt-href="https://wa.me/33626467133?text=Ol%C3%A1+Caio%2C+vi+seu+site+e+gostaria+de+mais+informa%C3%A7%C3%B5es."
+   data-en-href="https://wa.me/33626467133?text=Hi+Caio%2C+I+saw+your+website+and+I+would+like+more+information."
+   data-es-href="https://wa.me/33626467133?text=Hola+Caio%2C+vi+tu+web+y+me+gustar%C3%ADa+m%C3%A1s+informaci%C3%B3n.">
+  <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+</a>
+
+<script>
+(function () {
+  'use strict';
+
+  const navbar = document.getElementById('navbar');
+  function updateNavbar() { navbar.classList.toggle('shrunk', window.scrollY > 30); }
+  window.addEventListener('scroll', updateNavbar, { passive: true });
+  updateNavbar();
+
+  const burger = document.getElementById('burger-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  function closeMenu() {
+    burger.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+    mobileMenu.classList.remove('open');
+  }
+  burger.addEventListener('click', function () {
+    const isOpen = mobileMenu.classList.toggle('open');
+    burger.classList.toggle('open', isOpen);
+    burger.setAttribute('aria-expanded', String(isOpen));
+  });
+  mobileMenu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeMenu); });
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0, rootMargin: '0px 0px -10% 0px' });
+  revealEls.forEach(function (el) { io.observe(el); });
+
+  function sweepReveal() {
+    revealEls.forEach(function (el) {
+      if (el.classList.contains('visible')) return;
+      if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('visible');
+    });
+  }
+  sweepReveal();
+  window.addEventListener('load', sweepReveal);
+  let sweepTicking = false;
+  window.addEventListener('scroll', function () {
+    if (!sweepTicking) {
+      requestAnimationFrame(function () { sweepReveal(); sweepTicking = false; });
+      sweepTicking = true;
+    }
+  }, { passive: true });
+
+  const titles = {
+    pt: 'Caio Dornelas — Barbeiro em Ourense',
+    en: 'Caio Dornelas — Barber in Ourense',
+    es: 'Caio Dornelas — Barbero en Ourense'
+  };
+  const htmlLangs = { pt: 'pt-BR', en: 'en', es: 'es' };
+
+  function applyLang(lang) {
+    document.documentElement.lang = htmlLangs[lang] || 'es';
+    document.title = titles[lang] || titles.es;
+
+    document.querySelectorAll('[data-pt]').forEach(function (el) {
+      const val = el.getAttribute('data-' + lang);
+      if (val !== null) el.innerHTML = val;
+    });
+    document.querySelectorAll('[data-pt-href]').forEach(function (link) {
+      const h = link.getAttribute('data-' + lang + '-href');
+      if (h) link.setAttribute('href', h);
+    });
+
+    ['btn-pt', 'btn-en', 'btn-es', 'btn-pt-m', 'btn-en-m', 'btn-es-m'].forEach(function (id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.toggle('active', el.id.indexOf('btn-' + lang) === 0);
+    });
+  }
+  window.setLang = applyLang;
+
+  document.getElementById('f-copy').textContent =
+    '© ' + new Date().getFullYear() + ' Caio Dornelas. Tous droits réservés.';
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caio Dornelas — Barbeiro em Paris</title>
+<meta name="description" content="Caio Dornelas, barbeiro brasileiro em Paris. Corte, barba e cuidado de verdade — em Boulogne-Billancourt, Bondy ou a domicílio.">
+<meta property="og:title" content="Caio Dornelas — Barbeiro em Paris">
+<meta property="og:description" content="Barbeiro brasileiro baseado em Paris. Ouço antes de cortar.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="images/og-cover.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════
+   RESET & BASE
+═══════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:       #0D0C0A;
+  --bg-2:     #121110;
+  --bg-3:     #171514;
+  --white:    #FFFFFF;
+  --off:      rgba(255,255,255,0.72);
+  --muted:    rgba(255,255,255,0.42);
+  --faint:    rgba(255,255,255,0.18);
+  --divider:  rgba(255,255,255,0.09);
+  --navy:     #1B2A4A;
+  --navy-2:   #26396A;
+  --font-d:   'Bebas Neue', 'Arial Narrow', sans-serif;
+  --font-b:   'Manrope', system-ui, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-b);
+  font-weight: 300;
+  background: var(--bg);
+  color: var(--white);
+  overflow-x: hidden;
+  line-height: 1.5;
+}
+
+a { text-decoration: none; color: inherit; }
+button { border: none; background: none; font-family: var(--font-b); cursor: pointer; }
+ul { list-style: none; }
+img { max-width: 100%; display: block; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* ═══════════════════════════
+   SHARED
+═══════════════════════════ */
+.section-inner { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+.section-head { margin-bottom: 56px; }
+.section-eyebrow {
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--navy-2);
+  font-weight: 500;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.section-eyebrow::after { content: ''; flex: 0 0 40px; height: 1px; background: var(--divider); }
+.section-title {
+  font-family: var(--font-d);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  font-size: clamp(2.2rem, 4.4vw, 3.6rem);
+  line-height: 1.05;
+  color: var(--white);
+}
+
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-d1 { transition-delay: 0.08s; }
+.reveal-d2 { transition-delay: 0.16s; }
+.reveal-d3 { transition-delay: 0.24s; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 34px;
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: background 0.3s, border-color 0.3s, transform 0.2s, color 0.3s;
+  white-space: nowrap;
+}
+.btn svg { width: 15px; height: 15px; flex-shrink: 0; }
+.btn-primary { background: var(--navy); color: var(--white); }
+.btn-primary:hover { background: var(--navy-2); transform: translateY(-2px); }
+.btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.28); }
+.btn-outline:hover { border-color: var(--white); transform: translateY(-2px); }
+.btn-block { width: 100%; }
+
+/* ═══════════════════════════
+   NAVBAR
+═══════════════════════════ */
+#navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 40px;
+  transition: background 0.4s, padding 0.3s, border-color 0.4s;
+  border-bottom: 1px solid transparent;
+}
+#navbar.shrunk {
+  background: rgba(13,12,10,0.86);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 16px 40px;
+  border-bottom-color: var(--divider);
+}
+
+.nav-logo {
+  font-family: var(--font-d);
+  font-size: 1.15rem;
+  letter-spacing: 0.08em;
+  color: var(--white);
+  flex-shrink: 0;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+}
+.nav-links a {
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--off);
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--white); }
+
+.nav-right { display: flex; align-items: center; gap: 26px; }
+
+.lang-toggle { display: flex; align-items: center; gap: 8px; }
+.lang-btn {
+  font-size: 0.64rem;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+  padding: 2px 0;
+  transition: color 0.2s;
+}
+.lang-btn.active { color: var(--white); }
+.lang-sep { color: var(--faint); font-size: 0.66rem; }
+
+.nav-cta { display: inline-flex; }
+
+.burger {
+  display: none;
+  width: 26px; height: 18px;
+  position: relative;
+  flex-shrink: 0;
+}
+.burger span {
+  position: absolute; left: 0; right: 0; height: 1px;
+  background: var(--white);
+  transition: transform 0.3s, opacity 0.3s, top 0.3s;
+}
+.burger span:nth-child(1) { top: 0; }
+.burger span:nth-child(2) { top: 8px; }
+.burger span:nth-child(3) { top: 16px; }
+.burger.open span:nth-child(1) { top: 8px; transform: rotate(45deg); }
+.burger.open span:nth-child(2) { opacity: 0; }
+.burger.open span:nth-child(3) { top: 8px; transform: rotate(-45deg); }
+
+#mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 34px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-12px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+#mobile-menu.open { opacity: 1; pointer-events: auto; transform: none; }
+#mobile-menu a.mm-link {
+  font-family: var(--font-d);
+  font-size: 2rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: var(--white);
+}
+#mobile-menu .lang-toggle { margin-top: 8px; }
+
+/* ═══════════════════════════
+   HERO
+═══════════════════════════ */
+#hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(27,42,74,0.35) 0%, transparent 55%),
+    linear-gradient(155deg, #171511 0%, #0c0b09 55%, #080706 100%);
+}
+.hero-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  background-size: 220px;
+  opacity: 0.5;
+}
+.hero-bg img {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(8,7,6,0.35) 0%, rgba(8,7,6,0.55) 55%, rgba(8,7,6,0.88) 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+  padding: 0 28px;
+}
+
+.hero-name {
+  font-family: var(--font-d);
+  font-weight: 400;
+  font-size: clamp(3.4rem, 9vw, 6.6rem);
+  line-height: 0.96;
+  letter-spacing: 0.01em;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+
+.hero-subtitle {
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--off);
+  font-weight: 500;
+  margin-bottom: 26px;
+}
+
+.hero-tagline {
+  font-family: var(--font-b);
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  font-weight: 300;
+  color: rgba(255,255,255,0.82);
+  max-width: 440px;
+  margin: 0 auto 44px;
+  line-height: 1.6;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.hero-scroll-text {
+  font-size: 0.56rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.hero-scroll-arrow {
+  width: 15px; height: 15px;
+  border-right: 1px solid var(--muted);
+  border-bottom: 1px solid var(--muted);
+  transform: rotate(45deg);
+  animation: bounceDown 2.2s ease-in-out infinite;
+}
+@keyframes bounceDown {
+  0%, 100% { transform: rotate(45deg) translate(0,0); }
+  50%      { transform: rotate(45deg) translate(4px,4px); }
+}
+
+/* ═══════════════════════════
+   ONDE ATENDO
+═══════════════════════════ */
+#onde-atendo { background: var(--bg-2); padding: 130px 0; border-top: 1px solid var(--divider); }
+
+.locais-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--divider);
+}
+
+.local-card {
+  background: var(--bg-2);
+  padding: 44px 36px;
+  display: flex;
+  flex-direction: column;
+}
+
+.local-name {
+  font-family: var(--font-d);
+  font-size: 1.7rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+.local-place {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--navy-2);
+  font-weight: 600;
+  margin-bottom: 26px;
+}
+
+.local-hours { font-size: 0.8rem; color: var(--off); line-height: 1.9; margin-bottom: 18px; }
+.local-hours span { display: block; }
+
+.local-address {
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 18px;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+a.local-address:hover { color: var(--off); border-bottom-color: var(--faint); }
+
+.local-note {
+  font-size: 0.74rem;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 30px;
+  flex-grow: 1;
+}
+
+/* ═══════════════════════════
+   SERVIÇOS
+═══════════════════════════ */
+#servicos { background: var(--bg); padding: 90px 0; border-top: 1px solid var(--divider); }
+#servicos .section-head { margin-bottom: 32px; }
+
+.servicos-list { border-top: 1px solid var(--divider); max-width: 780px; }
+
+.servico-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--divider);
+}
+.servico-name {
+  font-family: var(--font-d);
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: var(--white);
+  flex-shrink: 0;
+}
+.servico-desc {
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-align: right;
+  max-width: 360px;
+  line-height: 1.55;
+}
+
+.servicos-note {
+  margin-top: 28px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.servicos-note p { font-size: 0.78rem; color: var(--muted); }
+
+/* ═══════════════════════════
+   TRABALHOS
+═══════════════════════════ */
+#trabalhos { background: var(--bg-2); padding: 130px 0; border-top: 1px solid var(--divider); }
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+}
+
+.trabalhos-note { margin-top: 40px; display: flex; justify-content: center; }
+.gallery-item {
+  position: relative;
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  background: linear-gradient(155deg, #1b1917 0%, #221f1b 100%);
+}
+.gallery-item img {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.2,0.7,0.3,1);
+}
+.gallery-item:hover img { transform: scale(1.07); }
+.gallery-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.56rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.12);
+}
+.gallery-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 55%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.gallery-item:hover::after { opacity: 1; }
+
+/* ═══════════════════════════
+   SOBRE
+═══════════════════════════ */
+#sobre { background: var(--bg); padding: 130px 0; border-top: 1px solid var(--divider); }
+
+.sobre-grid {
+  display: grid;
+  grid-template-columns: 5fr 6fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.sobre-photo {
+  position: relative;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  background: linear-gradient(155deg, #171512 0%, #1f1c18 100%);
+}
+.sobre-photo img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.05);
+}
+.sobre-photo-placeholder {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.56rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,255,255,0.14);
+}
+
+.sobre-bio {
+  font-size: 0.9rem;
+  line-height: 2;
+  color: rgba(255,255,255,0.55);
+  font-weight: 300;
+  margin-bottom: 40px;
+  max-width: 480px;
+}
+.sobre-bio strong { color: rgba(255,255,255,0.88); font-weight: 500; }
+
+/* ═══════════════════════════
+   FAQ
+═══════════════════════════ */
+#faq { background: var(--bg-2); padding: 130px 0; border-top: 1px solid var(--divider); }
+
+.faq-list { max-width: 760px; border-top: 1px solid var(--divider); }
+.faq-item { border-bottom: 1px solid var(--divider); }
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 26px 0;
+  font-size: 0.95rem;
+  color: var(--white);
+  font-weight: 400;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-plus {
+  flex-shrink: 0;
+  width: 22px; height: 22px;
+  position: relative;
+}
+.faq-plus::before, .faq-plus::after {
+  content: '';
+  position: absolute;
+  background: var(--muted);
+  transition: transform 0.3s, background 0.3s;
+}
+.faq-plus::before { left: 0; top: 50%; width: 100%; height: 1px; transform: translateY(-50%); }
+.faq-plus::after  { top: 0; left: 50%; height: 100%; width: 1px; transform: translateX(-50%); }
+.faq-item[open] .faq-plus::after { transform: translateX(-50%) rotate(90deg); opacity: 0; }
+.faq-item[open] summary { color: var(--white); }
+.faq-item[open] .faq-plus::before { background: var(--white); }
+.faq-body { font-size: 0.82rem; color: var(--muted); line-height: 1.85; padding: 0 0 26px; max-width: 620px; }
+
+/* ═══════════════════════════
+   FOOTER
+═══════════════════════════ */
+footer { background: #08070680; padding: 70px 0 32px; border-top: 1px solid var(--divider); }
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 48px;
+  margin-bottom: 56px;
+}
+
+.f-brand-name {
+  font-family: var(--font-d);
+  font-size: 1.7rem;
+  letter-spacing: 0.01em;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.f-brand-sub {
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.footer-nav { display: flex; flex-wrap: wrap; gap: 28px; }
+.footer-nav a {
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--off);
+  transition: color 0.2s;
+}
+.footer-nav a:hover { color: var(--white); }
+
+.footer-mid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding-top: 40px;
+  border-top: 1px solid var(--divider);
+  margin-bottom: 32px;
+}
+
+.social-row { display: flex; gap: 22px; }
+.social-link {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--muted);
+  transition: color 0.2s;
+}
+.social-link:hover { color: var(--white); }
+.social-link svg { width: 14px; height: 14px; }
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  color: var(--faint);
+}
+
+/* ═══════════════════════════
+   WHATSAPP FLOAT
+═══════════════════════════ */
+#wa-float {
+  position: fixed;
+  bottom: 28px; right: 28px;
+  z-index: 900;
+  width: 52px; height: 52px;
+  border-radius: 4px;
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s, transform 0.25s;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+}
+#wa-float:hover { background: var(--navy-2); transform: translateY(-3px) scale(1.05); }
+#wa-float svg { width: 22px; height: 22px; }
+
+/* ═══════════════════════════
+   RESPONSIVE
+═══════════════════════════ */
+@media (max-width: 900px) {
+  .nav-links, .nav-right .nav-cta, .nav-right .lang-toggle { display: none; }
+  .burger { display: block; }
+
+  #onde-atendo, #trabalhos, #sobre, #faq { padding: 90px 0; }
+  #servicos { padding: 60px 0; }
+
+  .locais-grid { grid-template-columns: 1fr; }
+  .local-card { padding: 40px 28px; }
+
+  .servico-row { flex-direction: column; align-items: flex-start; gap: 4px; padding: 15px 0; }
+  .servico-desc { text-align: left; max-width: 100%; }
+
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .sobre-grid { grid-template-columns: 1fr; gap: 40px; }
+  .sobre-photo { max-width: 320px; }
+
+  .footer-top { gap: 32px; }
+}
+
+@media (max-width: 480px) {
+  #navbar { padding: 18px 20px; }
+  #navbar.shrunk { padding: 14px 20px; }
+  .section-inner { padding: 0 20px; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero-actions { flex-direction: column; width: 100%; }
+  .hero-actions .btn { width: 100%; }
+}
+
+@media (min-width: 1440px) {
+  #navbar { padding: 30px 64px; }
+  #navbar.shrunk { padding: 18px 64px; }
+}
+</style>
+</head>
+<body>
+
+<!--
+  ═══════════════════════════════════════════════════════════
+  IMAGENS A INSERIR (basta salvar os arquivos com estes nomes
+  dentro de uma pasta /images na raiz do site):
+
+  images/hero.jpg          → foto de Caio de costas cortando cabelo
+  images/sobre.jpg         → retrato de Caio (única foto de rosto do site)
+  images/trabalho-01.jpg … images/trabalho-09.jpg → galeria de trabalhos
+
+  Até lá, placeholders elegantes são exibidos automaticamente.
+  ═══════════════════════════════════════════════════════════
+-->
+
+<!-- ═══ NAVBAR ═══ -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">Caio Dornelas</a>
+
+  <div class="nav-links">
+    <a href="#onde-atendo" data-pt="Onde atendo" data-fr="Où je travaille">Onde atendo</a>
+    <a href="#servicos" data-pt="Serviços" data-fr="Prestations">Serviços</a>
+    <a href="#trabalhos" data-pt="Trabalhos" data-fr="Réalisations">Trabalhos</a>
+    <a href="#sobre" data-pt="Sobre" data-fr="À propos">Sobre</a>
+    <a href="#faq" data-pt="FAQ" data-fr="FAQ">FAQ</a>
+  </div>
+
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btn-pt" onclick="setLang('pt')">PT</button>
+      <span class="lang-sep">|</span>
+      <button class="lang-btn" id="btn-fr" onclick="setLang('fr')">FR</button>
+    </div>
+    <a class="btn btn-primary nav-cta"
+       href="https://wa.me/33626467133?text=Ol%C3%A1+Caio%2C+vi+seu+site."
+       target="_blank" rel="noopener"
+       data-pt-href="https://wa.me/33626467133?text=Ol%C3%A1+Caio%2C+vi+seu+site."
+       data-fr-href="https://wa.me/33626467133?text=Bonjour+Caio%2C+j%27ai+vu+votre+site.">
+      <span data-pt="Falar comigo" data-fr="Me contacter">Falar comigo</span>
+    </a>
+  </div>
+
+  <button class="burger" id="burger-btn" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ═══ MOBILE MENU ═══ -->
+<div id="mobile-menu">
+  <a class="mm-link" href="#onde-atendo" data-pt="Onde atendo" data-fr="Où je travaille">Onde atendo</a>
+  <a class="mm-link" href="#servicos" data-pt="Serviços" data-fr="Prestations">Serviços</a>
+  <a class="mm-link" href="#trabalhos" data-pt="Trabalhos" data-fr="Réalisations">Trabalhos</a>
+  <a class="mm-link" href="#sobre" data-pt="Sobre" data-fr="À propos">Sobre</a>
+  <a class="mm-link" href="#faq" data-pt="FAQ" data-fr="FAQ">FAQ</a>
+  <a class="btn btn-primary"
+     href="https://wa.me/33626467133?text=Ol%C3%A1+Caio%2C+vi+seu+site."
+     target="_blank" rel="noopener"
+     data-pt-href="https://wa.me/33626467133?text=Ol%C3%A1+Caio%2C+vi+seu+site."
+     data-fr-href="https://wa.me/33626467133?text=Bonjour+Caio%2C+j%27ai+vu+votre+site.">
+    <span data-pt="Falar comigo" data-fr="Me contacter">Falar comigo</span>
+  </a>
+  <div class="lang-toggle">
+    <button class="lang-btn active" id="btn-pt-m" onclick="setLang('pt')">PT</button>
+    <span class="lang-sep">|</span>
+    <button class="lang-btn" id="btn-fr-m" onclick="setLang('fr')">FR</button>
+  </div>
+</div>
+
+<!-- ═══ SECTION 1: HERO ═══ -->
+<header id="hero">
+  <div class="hero-bg">
+    <img src="images/hero.jpg" alt="Caio Dornelas cortando cabelo" loading="eager"
+         onerror="this.style.display='none'">
+  </div>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <h1 class="hero-name">Caio Dornelas</h1>
+    <p class="hero-subtitle">
+      <span data-pt="Barbeiro · Paris &amp; Região" data-fr="Barbier · Paris &amp; Région">Barbeiro · Paris &amp; Região</span>
+    </p>
+    <p class="hero-tagline">
+      <span data-pt="Cada corte começa com uma conversa." data-fr="Chaque coupe commence par une conversation.">Cada corte começa com uma conversa.</span>
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary"
+         href="https://wa.me/33626467133?text=Ol%C3%A1+Caio%2C+vi+seu+site."
+         target="_blank" rel="noopener"
+         data-pt-href="https://wa.me/33626467133?text=Ol%C3%A1+Caio%2C+vi+seu+site."
+         data-fr-href="https://wa.me/33626467133?text=Bonjour+Caio%2C+j%27ai+vu+votre+site.">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+        <span data-pt="Falar comigo" data-fr="Me contacter">Falar comigo</span>
+      </a>
+      <a class="btn btn-outline" href="#trabalhos">
+        <span data-pt="Ver trabalhos" data-fr="Voir les réalisations">Ver trabalhos</span>
+      </a>
+    </div>
+  </div>
+
+  <a class="hero-scroll" href="#onde-atendo" aria-label="Descobrir mais">
+    <span class="hero-scroll-text" data-pt="Descobrir" data-fr="Découvrir">Descobrir</span>
+    <span class="hero-scroll-arrow"></span>
+  </a>
+</header>
+
+<main>
+
+<!-- ═══ SECTION 2: ONDE ATENDO ═══ -->
+<section id="onde-atendo">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <p class="section-eyebrow"><span data-pt="Localizações" data-fr="Localisations">Localizações</span></p>
+      <h2 class="section-title"><span data-pt="Onde atendo" data-fr="Où je travaille">Onde atendo</span></h2>
+    </div>
+  </div>
+
+  <div class="locais-grid">
+    <article class="local-card reveal reveal-d1">
+      <h3 class="local-name">Barber des Princes</h3>
+      <p class="local-place">Boulogne-Billancourt</p>
+      <div class="local-hours">
+        <span data-pt="Terça a Sábado" data-fr="Mardi – Samedi">Terça a Sábado</span>
+        <span>10h – 20h</span>
+      </div>
+      <a class="local-address"
+         href="https://www.google.com/maps/search/?api=1&query=118%20Route%20de%20la%20Reine%2C%2092100%20Boulogne-Billancourt"
+         target="_blank" rel="noopener">
+        118 Route de la Reine, 92100 Boulogne-Billancourt
+      </a>
+      <p class="local-note">
+        <span data-pt="Agendamento online obrigatório — ao agendar, selecione o barbeiro Caio."
+              data-fr="Réservation en ligne obligatoire — sélectionnez le barbier Caio lors de la réservation.">
+          Agendamento online obrigatório — ao agendar, selecione o barbeiro Caio.
+        </span>
+      </p>
+      <a class="btn btn-outline btn-block" href="https://www.planity.com/barber-des-princes-92100-boulogne-billancourt" target="_blank" rel="noopener">
+        <span data-pt="Agendar online" data-fr="Réserver en ligne">Agendar online</span>
+      </a>
+    </article>
+
+    <article class="local-card reveal reveal-d2">
+      <h3 class="local-name">Estúdio Caio Dornelas</h3>
+      <p class="local-place">Bondy</p>
+      <div class="local-hours">
+        <span data-pt="Segunda · 09h – 19h" data-fr="Lundi · 09h – 19h">Segunda · 09h – 19h</span>
+        <span data-pt="Terça a Sexta (noite) · a partir das 20h40" data-fr="Mardi – Vendredi (soir) · à partir de 20h40">Terça a Sexta (noite) · a partir das 20h40</span>
+      </div>
+      <a class="local-address"
+         href="https://www.google.com/maps/search/?api=1&query=1%20Cours%20de%20la%20R%C3%A9publique%2C%2093140%20Bondy"
+         target="_blank" rel="noopener">
+        1 Cours de la République, 93140 Bondy
+      </a>
+      <p class="local-note">&nbsp;</p>
+      <a class="btn btn-outline btn-block"
+         href="https://wa.me/33626467133?text=Ol%C3%A1+Caio%2C+vi+seu+site+e+gostaria+de+agendar+no+studio+em+Bondy."
+         target="_blank" rel="noopener"
+         data-pt-href="https://wa.me/33626467133?text=Ol%C3%A1+Caio%2C+vi+seu+site+e+gostaria+de+agendar+no+studio+em+Bondy."
+         data-fr-href="https://wa.me/33626467133?text=Bonjour+Caio%2C+j%27ai+vu+votre+site+et+j%27aimerais+r%C3%A9server+au+studio+%C3%A0+Bondy.">
+        <span data-pt="Agendar via WhatsApp" data-fr="Réserver via WhatsApp">Agendar via WhatsApp</span>
+      </a>
+    </article>
+
+    <article class="local-card reveal reveal-d3">
+      <h3 class="local-name"><span data-pt="Domicílio" data-fr="Domicile">Domicílio</span></h3>
+      <p class="local-place"><span data-pt="Região de Paris" data-fr="Région parisienne">Região de Paris</span></p>
+      <div class="local-hours">
+        <span data-pt="Sob consulta" data-fr="Sur consultation">Sob consulta</span>
+      </div>
+      <p class="local-note" style="margin-top:8px">
+        <span data-pt="Atendimento onde você estiver, dentro da região parisiense."
+              data-fr="Un service où que vous soyez, dans la région parisienne.">
+          Atendimento onde você estiver, dentro da região parisiense.
+        </span>
+      </p>
+      <a class="btn btn-outline btn-block"
+         href="https://wa.me/33626467133?text=Ol%C3%A1+Caio%2C+vi+seu+site+e+gostaria+de+saber+sobre+atendimento+a+domic%C3%ADlio."
+         target="_blank" rel="noopener"
+         data-pt-href="https://wa.me/33626467133?text=Ol%C3%A1+Caio%2C+vi+seu+site+e+gostaria+de+saber+sobre+atendimento+a+domic%C3%ADlio."
+         data-fr-href="https://wa.me/33626467133?text=Bonjour+Caio%2C+j%27ai+vu+votre+site+et+j%27aimerais+des+informations+sur+le+service+%C3%A0+domicile.">
+        <span data-pt="Consultar disponibilidade" data-fr="Consulter les disponibilités">Consultar disponibilidade</span>
+      </a>
+    </article>
+  </div>
+</section>
+
+<!-- ═══ SECTION 3: SERVIÇOS ═══ -->
+<section id="servicos">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <p class="section-eyebrow"><span data-pt="O que eu faço" data-fr="Ce que je fais">O que eu faço</span></p>
+      <h2 class="section-title"><span data-pt="Serviços" data-fr="Prestations">Serviços</span></h2>
+    </div>
+
+    <div class="servicos-list reveal">
+      <div class="servico-row">
+        <span class="servico-name"><span data-pt="Corte de cabelo" data-fr="Coupe de cheveux">Corte de cabelo</span></span>
+        <span class="servico-desc"><span data-pt="Precisão no risco, acabamento que dura." data-fr="Précision de la coupe, une finition qui dure.">Precisão no risco, acabamento que dura.</span></span>
+      </div>
+      <div class="servico-row">
+        <span class="servico-name"><span data-pt="Barba" data-fr="Barbe">Barba</span></span>
+        <span class="servico-desc"><span data-pt="Contorno definido, na medida do seu rosto." data-fr="Contour défini, à la mesure de votre visage.">Contorno definido, na medida do seu rosto.</span></span>
+      </div>
+      <div class="servico-row">
+        <span class="servico-name"><span data-pt="Corte + Barba" data-fr="Coupe + Barbe">Corte + Barba</span></span>
+        <span class="servico-desc"><span data-pt="O conjunto completo, em uma única sessão." data-fr="L'ensemble complet, en une seule séance.">O conjunto completo, em uma única sessão.</span></span>
+      </div>
+      <div class="servico-row">
+        <span class="servico-name"><span data-pt="Sobrancelha" data-fr="Sourcils">Sobrancelha</span></span>
+        <span class="servico-desc"><span data-pt="Detalhe que muda a expressão do rosto." data-fr="Un détail qui change l'expression du visage.">Detalhe que muda a expressão do rosto.</span></span>
+      </div>
+      <div class="servico-row">
+        <span class="servico-name"><span data-pt="Selagem" data-fr="Lissage">Selagem</span></span>
+        <span class="servico-desc"><span data-pt="Alinhamento e brilho, sem perder o volume natural." data-fr="Alignement et brillance, sans perdre le volume naturel.">Alinhamento e brilho, sem perder o volume natural.</span></span>
+      </div>
+    </div>
+
+    <div class="servicos-note reveal">
+      <p><span data-pt="Para valores e disponibilidade, fale comigo no WhatsApp." data-fr="Pour les tarifs et les disponibilités, contactez-moi sur WhatsApp.">Para valores e disponibilidade, fale comigo no WhatsApp.</span></p>
+      <a class="btn btn-outline"
+         href="https://wa.me/33626467133?text=Ol%C3%A1+Caio%2C+vi+seu+site+e+gostaria+de+mais+informa%C3%A7%C3%B5es."
+         target="_blank" rel="noopener"
+         data-pt-href="https://wa.me/33626467133?text=Ol%C3%A1+Caio%2C+vi+seu+site+e+gostaria+de+mais+informa%C3%A7%C3%B5es."
+         data-fr-href="https://wa.me/33626467133?text=Bonjour+Caio%2C+j%27ai+vu+votre+site+et+j%27aimerais+plus+d%27informations.">
+        <span data-pt="Falar no WhatsApp" data-fr="Contacter sur WhatsApp">Falar no WhatsApp</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 4: TRABALHOS ═══ -->
+<section id="trabalhos">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <p class="section-eyebrow"><span data-pt="Portfólio" data-fr="Portfolio">Portfólio</span></p>
+      <h2 class="section-title"><span data-pt="Trabalhos" data-fr="Réalisations">Trabalhos</span></h2>
+    </div>
+  </div>
+
+  <div class="gallery-grid">
+    <div class="gallery-item reveal reveal-d1"><div class="gallery-placeholder">01</div><img src="images/trabalho-01.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+    <div class="gallery-item reveal reveal-d2"><div class="gallery-placeholder">02</div><img src="images/trabalho-02.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+    <div class="gallery-item reveal reveal-d3"><div class="gallery-placeholder">03</div><img src="images/trabalho-03.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+    <div class="gallery-item reveal reveal-d1"><div class="gallery-placeholder">04</div><img src="images/trabalho-04.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+    <div class="gallery-item reveal reveal-d2"><div class="gallery-placeholder">05</div><img src="images/trabalho-05.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+    <div class="gallery-item reveal reveal-d3"><div class="gallery-placeholder">06</div><img src="images/trabalho-06.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+    <div class="gallery-item reveal reveal-d1"><div class="gallery-placeholder">07</div><img src="images/trabalho-07.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+    <div class="gallery-item reveal reveal-d2"><div class="gallery-placeholder">08</div><img src="images/trabalho-08.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+    <div class="gallery-item reveal reveal-d3"><div class="gallery-placeholder">09</div><img src="images/trabalho-09.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+  </div>
+
+  <div class="section-inner">
+    <div class="trabalhos-note reveal">
+      <a class="btn btn-outline" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDczMDI0MTEyMTA3NDY0?story_media_id=3652599448414556374&stkn=cmVtOW1nMGZmaDd4" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+        <span data-pt="Ver mais no Instagram" data-fr="Voir plus sur Instagram">Ver mais no Instagram</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 5: SOBRE ═══ -->
+<section id="sobre">
+  <div class="section-inner">
+    <div class="sobre-grid">
+      <div class="sobre-photo reveal">
+        <div class="sobre-photo-placeholder"><span data-pt="Foto — Caio Dornelas" data-fr="Photo — Caio Dornelas">Foto — Caio Dornelas</span></div>
+        <img src="images/sobre.jpg" alt="Caio Dornelas" loading="lazy" onerror="this.style.display='none'">
+      </div>
+      <div class="sobre-content reveal reveal-d1">
+        <p class="section-eyebrow" style="margin-bottom:16px"><span data-pt="Sobre" data-fr="À propos">Sobre</span></p>
+        <h2 class="section-title" style="margin-bottom:30px">Caio Dornelas</h2>
+        <p class="sobre-bio">
+          <span
+            data-pt="<strong>8 anos de experiência.</strong> Nasci no Brasil e escolhi Paris para construir minha carreira. Antes de cortar, eu escuto — sua rotina, seu jeito, o que funciona pra você no dia a dia. Não é sobre repetir uma referência de Instagram. É sobre um corte que é seu, que você reconhece no espelho toda manhã."
+            data-fr="<strong>8 ans d'expérience.</strong> Né au Brésil, j'ai choisi Paris pour construire ma carrière. Avant de couper, j'écoute — votre quotidien, votre style, ce qui fonctionne vraiment pour vous. Il ne s'agit pas de reproduire une référence Instagram. Il s'agit d'une coupe qui est la vôtre, que vous reconnaissez dans le miroir chaque matin.">
+            <strong>8 anos de experiência.</strong> Nasci no Brasil e escolhi Paris para construir minha carreira. Antes de cortar, eu escuto — sua rotina, seu jeito, o que funciona pra você no dia a dia. Não é sobre repetir uma referência de Instagram. É sobre um corte que é seu, que você reconhece no espelho toda manhã.
+          </span>
+        </p>
+        <a class="btn btn-primary"
+           href="https://wa.me/33626467133?text=Ol%C3%A1+Caio%2C+vi+seu+site+e+gostaria+de+mais+informa%C3%A7%C3%B5es."
+           target="_blank" rel="noopener"
+           data-pt-href="https://wa.me/33626467133?text=Ol%C3%A1+Caio%2C+vi+seu+site+e+gostaria+de+mais+informa%C3%A7%C3%B5es."
+           data-fr-href="https://wa.me/33626467133?text=Bonjour+Caio%2C+j%27ai+vu+votre+site+et+j%27aimerais+plus+d%27informations.">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+          <span data-pt="Falar comigo no WhatsApp" data-fr="Me contacter sur WhatsApp">Falar comigo no WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 6: FAQ ═══ -->
+<section id="faq">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <p class="section-eyebrow"><span data-pt="Dúvidas" data-fr="Questions">Dúvidas</span></p>
+      <h2 class="section-title"><span data-pt="Perguntas frequentes" data-fr="Questions fréquentes">Perguntas frequentes</span></h2>
+    </div>
+
+    <div class="faq-list reveal">
+      <details class="faq-item">
+        <summary>
+          <span data-pt="Como funciona o agendamento?" data-fr="Comment fonctionne la prise de rendez-vous ?">Como funciona o agendamento?</span>
+          <span class="faq-plus"></span>
+        </summary>
+        <p class="faq-body">
+          <span data-pt="Depende do local. Na Barber des Princes, o agendamento é online pelo Planity — basta selecionar o barbeiro Caio. No studio e a domicílio, é direto pelo WhatsApp."
+                data-fr="Cela dépend du lieu. À la Barber des Princes, la réservation se fait en ligne sur Planity — il suffit de sélectionner le barbier Caio. Au studio et à domicile, c'est directement par WhatsApp.">
+            Depende do local. Na Barber des Princes, o agendamento é online pelo Planity — basta selecionar o barbeiro Caio. No studio e a domicílio, é direto pelo WhatsApp.
+          </span>
+        </p>
+      </details>
+      <details class="faq-item">
+        <summary>
+          <span data-pt="Você atende sem agendamento?" data-fr="Travaillez-vous sans rendez-vous ?">Você atende sem agendamento?</span>
+          <span class="faq-plus"></span>
+        </summary>
+        <p class="faq-body">
+          <span data-pt="Prefiro com hora marcada para garantir seu horário. Entre em contato antes."
+                data-fr="Je préfère travailler sur rendez-vous pour garantir votre créneau. Contactez-moi avant de passer.">
+            Prefiro com hora marcada para garantir seu horário. Entre em contato antes.
+          </span>
+        </p>
+      </details>
+      <details class="faq-item">
+        <summary>
+          <span data-pt="Qual a diferença entre os locais?" data-fr="Quelle est la différence entre les lieux ?">Qual a diferença entre os locais?</span>
+          <span class="faq-plus"></span>
+        </summary>
+        <p class="faq-body">
+          <span data-pt="Na barbearia você vem até mim em horário comercial. No studio o horário é mais flexível, inclusive à noite. A domicílio eu vou até você."
+                data-fr="À la barbershop, vous venez à moi aux horaires commerciaux. Au studio, les horaires sont plus flexibles, y compris en soirée. À domicile, c'est moi qui me déplace chez vous.">
+            Na barbearia você vem até mim em horário comercial. No studio o horário é mais flexível, inclusive à noite. A domicílio eu vou até você.
+          </span>
+        </p>
+      </details>
+      <details class="faq-item">
+        <summary>
+          <span data-pt="Você atende em francês?" data-fr="Travaillez-vous en français ?">Você atende em francês?</span>
+          <span class="faq-plus"></span>
+        </summary>
+        <p class="faq-body">
+          <span data-pt="Oui, je parle français." data-fr="Oui, je parle français.">Oui, je parle français.</span>
+        </p>
+      </details>
+      <details class="faq-item">
+        <summary>
+          <span data-pt="Como saber os valores?" data-fr="Comment connaître les tarifs ?">Como saber os valores?</span>
+          <span class="faq-plus"></span>
+        </summary>
+        <p class="faq-body">
+          <span data-pt="Me chame no WhatsApp e te passo tudo." data-fr="Contactez-moi sur WhatsApp, je vous donne toutes les infos.">Me chame no WhatsApp e te passo tudo.</span>
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="section-inner">
+    <div class="footer-top">
+      <div>
+        <p class="f-brand-name">Caio Dornelas</p>
+        <p class="f-brand-sub"><span data-pt="Barbeiro · Paris &amp; Região" data-fr="Barbier · Paris &amp; Région">Barbeiro · Paris &amp; Região</span></p>
+      </div>
+      <nav class="footer-nav">
+        <a href="#onde-atendo" data-pt="Onde atendo" data-fr="Où je travaille">Onde atendo</a>
+        <a href="#servicos" data-pt="Serviços" data-fr="Prestations">Serviços</a>
+        <a href="#trabalhos" data-pt="Trabalhos" data-fr="Réalisations">Trabalhos</a>
+        <a href="#sobre" data-pt="Sobre" data-fr="À propos">Sobre</a>
+        <a href="#faq" data-pt="FAQ" data-fr="FAQ">FAQ</a>
+      </nav>
+    </div>
+
+    <div class="footer-mid">
+      <div class="social-row">
+        <!-- TODO: Caio — substituir os href="#" pelos links reais do Instagram e TikTok -->
+        <a href="#" target="_blank" rel="noopener" class="social-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+          Instagram
+        </a>
+        <a href="#" target="_blank" rel="noopener" class="social-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+          TikTok
+        </a>
+      </div>
+      <a class="btn btn-outline"
+         href="https://wa.me/33626467133?text=Ol%C3%A1+Caio%2C+vi+seu+site+e+gostaria+de+mais+informa%C3%A7%C3%B5es."
+         target="_blank" rel="noopener"
+         data-pt-href="https://wa.me/33626467133?text=Ol%C3%A1+Caio%2C+vi+seu+site+e+gostaria+de+mais+informa%C3%A7%C3%B5es."
+         data-fr-href="https://wa.me/33626467133?text=Bonjour+Caio%2C+j%27ai+vu+votre+site+et+j%27aimerais+plus+d%27informations.">
+        <span data-pt="Falar comigo no WhatsApp" data-fr="Me contacter sur WhatsApp">Falar comigo no WhatsApp</span>
+      </a>
+    </div>
+
+    <div class="footer-bottom">
+      <span id="f-copy">© 2026 Caio Dornelas. Tous droits réservés.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══ FLOATING WHATSAPP ═══ -->
+<a id="wa-float"
+   href="https://wa.me/33626467133?text=Ol%C3%A1+Caio%2C+vi+seu+site+e+gostaria+de+mais+informa%C3%A7%C3%B5es."
+   target="_blank" rel="noopener"
+   aria-label="WhatsApp"
+   data-pt-href="https://wa.me/33626467133?text=Ol%C3%A1+Caio%2C+vi+seu+site+e+gostaria+de+mais+informa%C3%A7%C3%B5es."
+   data-fr-href="https://wa.me/33626467133?text=Bonjour+Caio%2C+j%27ai+vu+votre+site+et+j%27aimerais+plus+d%27informations.">
+  <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+</a>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ─── Navbar shrink on scroll ─── */
+  const navbar = document.getElementById('navbar');
+  function updateNavbar() { navbar.classList.toggle('shrunk', window.scrollY > 30); }
+  window.addEventListener('scroll', updateNavbar, { passive: true });
+  updateNavbar();
+
+  /* ─── Mobile menu ─── */
+  const burger = document.getElementById('burger-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  function closeMenu() {
+    burger.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+    mobileMenu.classList.remove('open');
+  }
+  burger.addEventListener('click', function () {
+    const isOpen = mobileMenu.classList.toggle('open');
+    burger.classList.toggle('open', isOpen);
+    burger.setAttribute('aria-expanded', String(isOpen));
+  });
+  mobileMenu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeMenu); });
+
+  /* ─── Reveal on scroll ───
+     IntersectionObserver handles the normal case. A manual sweep runs
+     alongside it as a safety net: if the page loads already scrolled
+     (anchor link, browser scroll restore, fast scrollbar drag) an element
+     can pass through without ever registering an intersection, which
+     would leave it stuck at opacity:0 permanently. The sweep just checks
+     "has this element's top already reached the viewport" and reveals it
+     immediately if so — cheap, idempotent, and runs once elements settle. */
+  const revealEls = document.querySelectorAll('.reveal');
+
+  const io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0, rootMargin: '0px 0px -10% 0px' });
+  revealEls.forEach(function (el) { io.observe(el); });
+
+  function sweepReveal() {
+    revealEls.forEach(function (el) {
+      if (el.classList.contains('visible')) return;
+      if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('visible');
+    });
+  }
+  sweepReveal();
+  window.addEventListener('load', sweepReveal);
+  let sweepTicking = false;
+  window.addEventListener('scroll', function () {
+    if (!sweepTicking) {
+      requestAnimationFrame(function () { sweepReveal(); sweepTicking = false; });
+      sweepTicking = true;
+    }
+  }, { passive: true });
+
+  /* ─── Bilingual toggle (PT / FR) ─── */
+  const titles = {
+    pt: 'Caio Dornelas — Barbeiro em Paris',
+    fr: 'Caio Dornelas — Barbier à Paris'
+  };
+
+  function applyLang(lang) {
+    document.documentElement.lang = lang === 'fr' ? 'fr' : 'pt-BR';
+    document.title = titles[lang] || titles.pt;
+
+    document.querySelectorAll('[data-pt]').forEach(function (el) {
+      const val = el.getAttribute('data-' + lang);
+      if (val !== null) el.innerHTML = val;
+    });
+
+    document.querySelectorAll('[data-pt-href]').forEach(function (link) {
+      const h = link.getAttribute('data-' + lang + '-href');
+      if (h) link.setAttribute('href', h);
+    });
+
+    ['btn-pt', 'btn-fr', 'btn-pt-m', 'btn-fr-m'].forEach(function (id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.toggle('active', el.id.startsWith('btn-' + lang));
+    });
+  }
+
+  window.setLang = applyLang;
+
+  /* ─── Footer year ─── */
+  document.getElementById('f-copy').textContent =
+    '© ' + new Date().getFullYear() + ' Caio Dornelas. Tous droits réservés.';
+
+})();
+</script>
+</body>
+</html>
